@@ -12,10 +12,10 @@ php-cli:
 	docker-compose exec app-php-cli bash
 
 tests-all:
-	docker-compose exec app-php-cli php bin/phpunit
+	docker-compose exec app-php-cli php vendor/bin/codecept run
 
 tests-functional:
-	docker-compose exec app-php-cli php bin/phpunit --testsuite functional
+	docker-compose exec app-php-cli php vendor/bin/codecept run functional
 
 tests-unit:
-	docker-compose exec app-php-cli php bin/phpunit --testsuite unit
+	docker-compose exec app-php-cli php vendor/bin/codecept run unit

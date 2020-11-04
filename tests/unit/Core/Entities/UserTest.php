@@ -1,14 +1,26 @@
 <?php
 
-namespace App\Tests\Unit\Core\Entities;
+namespace App\Tests;
 
 use App\Core\Entities\User\ResetToken;
-use App\Exceptions\DomainException;
 use App\Tests\Other\Factories\TestUserFactory;
-use PHPUnit\Framework\TestCase;
 
-class UserTest extends TestCase
+class UserTest extends \Codeception\Test\Unit
 {
+    /**
+     * @var \App\Tests\UnitTester
+     */
+    protected $tester;
+    
+    protected function _before()
+    {
+    }
+
+    protected function _after()
+    {
+    }
+
+
     public function testRegistrationByEmailOk(): void
     {
         $user = TestUserFactory::registerByEmail(
@@ -16,12 +28,12 @@ class UserTest extends TestCase
             $passwordHash = 'password_hash',
             $confirmToken = 'confirm_token'
         );
-        self::assertEquals($email, $user->getEmail());
-        self::assertEquals($passwordHash, $user->getPasswordHash());
-        self::assertEquals($confirmToken, $user->getConfirmToken());
+        $this->assertEquals($email, $user->getEmail());
+        $this->assertEquals($passwordHash, $user->getPasswordHash());
+        $this->assertEquals($confirmToken, $user->getConfirmToken());
 
-        self::assertTrue($user->isWait());
-        self::assertFalse($user->isActive());
+        $this->assertTrue($user->isWait());
+        $this->assertFalse($user->isActive());
     }
 
 
@@ -30,9 +42,9 @@ class UserTest extends TestCase
         $user = TestUserFactory::registerByEmail();
         $user->confirmRegistration();
 
-        self::assertFalse($user->isWait());
-        self::assertTrue($user->isActive());
-        self::assertNull($user->getConfirmToken());
+        $this->assertFalse($user->isWait());
+        $this->assertTrue($user->isActive());
+        $this->assertNull($user->getConfirmToken());
     }
 
 
@@ -46,13 +58,14 @@ class UserTest extends TestCase
     }
 
 
+
     public function testPasswordResetOk(): void
     {
         $user = TestUserFactory::registerByEmail();
         $user->confirmRegistration();
         $user->requestPasswordReset(new ResetToken('test_reset_token'));
 
-        self::assertEquals($user->getResetToken()->getToken(), 'test_reset_token');
+        $this->assertEquals($user->getResetToken()->getToken(), 'test_reset_token');
     }
 
 
