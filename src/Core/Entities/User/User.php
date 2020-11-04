@@ -4,6 +4,7 @@ namespace App\Core\Entities\User;
 
 use App\Core\Entities\Entity;
 use App\Exceptions\DomainException;
+use App\Exceptions\UserNotActiveException;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     uniqueConstraints={
  *          @ORM\UniqueConstraint(columns={"email"}, name="users_unique_email"),
  *          @ORM\UniqueConstraint(columns={"confirm_token"}, name="users_unique_confirm_token"),
+ *          @ORM\UniqueConstraint(columns={"reset_token_token"}, name="users_unique_reset_token"),
  *     },
  * )
  */
@@ -46,6 +48,11 @@ class User extends Entity
     private ?string $confirmToken;
 
     /**
+     * @ORM\Embedded(class="ResetToken", columnPrefix="reset_token_")
+     */
+    private ?ResetToken $resetToken;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private int $status;
@@ -60,6 +67,7 @@ class User extends Entity
     private function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
+        $this->resetToken = null;
     }
 
 
@@ -106,6 +114,12 @@ class User extends Entity
     }
 
 
+    public function getResetToken(): ?ResetToken
+    {
+        return $this->resetToken;
+    }
+
+
     /**
      * Returns whether the user has STATUS_WAIT.
      *
@@ -137,6 +151,42 @@ class User extends Entity
         }
         $this->status = self::STATUS_ACTIVE;
         $this->confirmToken = null;
+    }
+
+    /**
+     * Sets password reset token.
+     *
+     * @param ResetToken $newToken
+     *
+     * @throws UserNotActiveException
+     * @throws DomainException
+     */
+    public function requestPasswordReset(ResetToken $newToken): void
+    {
+        if (!$this->isActive()) {
+            throw new UserNotActiveException('User is not active');
+        }
+        if ($this->resetToken && !$this->resetToken->isExpired()) {
+            throw new DomainException('Reset token was already requested');
+        }
+        $this->resetToken = $newToken;
+    }
+
+
+    /**
+     * Resets password to a new one.
+     *
+     * @param string $passwordHash
+     *
+     * @throws DomainException
+     */
+    public function resetPassword(string $passwordHash): void
+    {
+        if (!$this->resetToken) {
+            throw new DomainException('Password reset was not requested');
+        }
+        $this->passwordHash = $passwordHash;
+        $this->resetToken = null;
     }
 
 }

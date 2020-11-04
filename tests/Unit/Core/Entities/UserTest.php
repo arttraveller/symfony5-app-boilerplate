@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit\Core\Entities;
 
+use App\Core\Entities\User\ResetToken;
 use App\Exceptions\DomainException;
 use App\Tests\Other\Factories\TestUserFactory;
 use PHPUnit\Framework\TestCase;
@@ -40,8 +41,28 @@ class UserTest extends TestCase
         $user = TestUserFactory::registerByEmail();
         $user->confirmRegistration();
 
-        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('User already confirmed');
         $user->confirmRegistration();
     }
 
+
+    public function testPasswordResetOk(): void
+    {
+        $user = TestUserFactory::registerByEmail();
+        $user->confirmRegistration();
+        $user->requestPasswordReset(new ResetToken('test_reset_token'));
+
+        self::assertEquals($user->getResetToken()->getToken(), 'test_reset_token');
+    }
+
+
+    public function testThrowsExceptionWhenPasswordResetRepeatBeforeTokenExpires(): void
+    {
+        $user = TestUserFactory::registerByEmail();
+        $user->confirmRegistration();
+        $user->requestPasswordReset(new ResetToken('test_reset_token'));
+
+        $this->expectExceptionMessage('Reset token was already requested');
+        $user->requestPasswordReset(new ResetToken('test_reset_token'));
+    }
 }
