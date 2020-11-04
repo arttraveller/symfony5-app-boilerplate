@@ -9,6 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(
+ *     name="users",
+ *     uniqueConstraints={
+ *          @ORM\UniqueConstraint(columns={"email"}, name="users_unique_email"),
+ *          @ORM\UniqueConstraint(columns={"confirm_token"}, name="users_unique_confirm_token"),
+ *     },
+ * )
  */
 class User extends Entity
 {
