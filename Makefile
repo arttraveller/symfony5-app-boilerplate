@@ -11,5 +11,11 @@ migrate:
 php-cli:
 	docker-compose exec app-php-cli bash
 
-tests-unit:
+tests-all:
 	docker-compose exec app-php-cli php bin/phpunit
+
+tests-functional:
+	docker-compose exec app-php-cli php bin/phpunit --testsuite functional
+
+tests-unit:
+	docker-compose exec app-php-cli php bin/phpunit --testsuite unit
