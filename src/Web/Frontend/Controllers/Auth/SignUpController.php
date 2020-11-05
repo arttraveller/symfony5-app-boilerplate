@@ -2,8 +2,11 @@
 
 namespace App\Web\Frontend\Controllers\Auth;
 
+use App\Core\Commands\Auth\SignUp\ConfirmEmailCommand;
+use App\Core\Commands\Auth\SignUp\ConfirmEmailHandler;
 use App\Core\Commands\Auth\SignUp\SignUpCommand;
 use App\Core\Commands\Auth\SignUp\SignUpHandler;
+use App\Exceptions\EntityNotFoundException;
 use App\Web\Forms\Auth\SignUpForm;
 use App\Web\Frontend\Controllers\FrontendController;
 use Psr\Log\LoggerInterface;
@@ -44,6 +47,26 @@ class SignUpController extends FrontendController
         return $this->render('frontend/auth/signUp/signUp.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+
+    /**
+     * @Route("/signup/confirm/{confirmToken}", name="auth_signup_confirm")
+     * @param string $confirmToken
+     * @param ConfirmEmailHandler $handler
+     * @return Response
+     */
+    public function confirm(string $confirmToken, ConfirmEmailHandler $handler): Response
+    {
+        $command = new ConfirmEmailCommand($confirmToken);
+        try {
+            $handler->handle($command);
+            $this->addFlash('success', 'Email is successfully confirmed.');
+        } catch (EntityNotFoundException $exc) {
+            $this->addFlash('error', 'Sorry, user not found.');
+        }
+
+        return $this->redirectToRoute('mainpage');
     }
 
 }

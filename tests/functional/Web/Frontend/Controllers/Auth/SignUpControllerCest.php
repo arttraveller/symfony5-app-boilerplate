@@ -4,7 +4,6 @@ namespace App\Tests;
 
 use App\Core\Repositories\UsersRepository;
 use App\DataFixtures\UsersFixtures;
-use App\Tests\FunctionalTester;
 
 class SignUpControllerCest
 {
@@ -55,5 +54,14 @@ class SignUpControllerCest
         // User in DB?
         $usersRepository = $I->grabService(UsersRepository::class);
         $newUser = $usersRepository->getOneByEmail('new-user@example.com');
+    }
+
+
+    public function testSignUpConfirm(FunctionalTester $I)
+    {
+        $I->amOnPage('/signup/confirm/' . UsersFixtures::UNCONFIRMED_USER_TOKEN);
+        $I->seeResponseCodeIs(200);
+        $I->seeCurrentUrlEquals('/');
+        $I->see('Email is successfully confirmed.', 'div.alert-success');
     }
 }
