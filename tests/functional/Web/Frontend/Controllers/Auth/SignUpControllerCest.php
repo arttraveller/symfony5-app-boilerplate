@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Core\Repositories\UsersRepository;
+use App\DataFixtures\UsersFixtures;
 use App\Tests\FunctionalTester;
 
 class SignUpControllerCest
@@ -22,6 +23,19 @@ class SignUpControllerCest
 
         $I->seeCurrentUrlEquals('/signup');
         $I->seeNumberOfElements('input.is-invalid', 2);
+    }
+
+
+    public function testSignUpWithExistsEmail(FunctionalTester $I)
+    {
+        $I->amOnPage('/signup');
+        $I->submitForm('form[name=sign_up_form]', [
+            'sign_up_form[email]' => UsersFixtures::CONFIRMED_USER_EMAIL,
+            'sign_up_form[password]' => 'password',
+        ]);
+
+        $I->seeCurrentUrlEquals('/signup');
+        $I->see('Email already in use.', 'span.form-error-message');
     }
 
 

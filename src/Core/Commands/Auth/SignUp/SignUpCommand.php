@@ -2,6 +2,7 @@
 
 namespace App\Core\Commands\Auth\SignUp;
 
+use App\Core\Validators\Auth\UniqueEmail;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SignUpCommand
@@ -10,8 +11,8 @@ class SignUpCommand
      * @Assert\NotBlank
      * @Assert\Email
      * @Assert\Length(max=255)
+     * @UniqueEmail()
      */
-    // TODO unique email
     public string $email = '';
 
     /**
