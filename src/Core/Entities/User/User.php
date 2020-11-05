@@ -9,7 +9,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Core\Repositories\UsersRepository")
  * @ORM\Table(
  *     name="users",
  *     uniqueConstraints={
