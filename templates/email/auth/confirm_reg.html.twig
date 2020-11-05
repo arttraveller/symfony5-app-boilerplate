@@ -1,0 +1,14 @@
+{% extends 'email/base.html.twig' %}
+
+{% block body %}
+
+    <p>
+        Thank you for registering!
+    </p>
+
+    {% set confirmUrl = url('auth_signup_confirm', {'confirmToken': confirmToken}) %}
+    <p>
+        <a href="{{ confirmUrl }}">Click here to activate your account</a>
+    </p>
+
+{% endblock %}

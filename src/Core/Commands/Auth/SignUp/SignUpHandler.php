@@ -6,6 +6,7 @@ use App\Core\Entities\User\User;
 use App\Core\Repositories\UsersRepository;
 use App\Core\Services\Auth\PasswordHasher;
 use App\Core\Services\Auth\Tokenizer;
+use App\Core\Services\Auth\TokenSender;
 
 class SignUpHandler
 {
@@ -14,11 +15,12 @@ class SignUpHandler
     private Tokenizer $tokenizer;
 
 
-    public function __construct(UsersRepository $repo, PasswordHasher $hasher, Tokenizer $tokenizer)
+    public function __construct(UsersRepository $repo, PasswordHasher $hasher, Tokenizer $tokenizer, TokenSender $tokenSender)
     {
         $this->usersRepo = $repo;
         $this->passwordHasher = $hasher;
         $this->tokenizer = $tokenizer;
+        $this->tokenSender = $tokenSender;
     }
 
 
@@ -33,5 +35,7 @@ class SignUpHandler
         );
 
         $this->usersRepo->add($newUser);
+
+        $this->tokenSender->sendConfirmToken($email, $confirmToken);
     }
 }
