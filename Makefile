@@ -2,6 +2,9 @@ docker-restart:
 	docker-compose down
 	docker-compose up -d
 
+load-fixtures:
+	docker-compose exec app-php-cli php bin/console doctrine:fixtures:load --no-interaction
+
 make-migration:
 	docker-compose exec app-php-cli php bin/console make:migration
 
