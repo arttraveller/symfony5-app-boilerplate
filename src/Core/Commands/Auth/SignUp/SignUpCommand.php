@@ -2,7 +2,7 @@
 
 namespace App\Core\Commands\Auth\SignUp;
 
-use App\Core\Validators\Auth\UniqueEmail;
+use App\Validators\Auth\UniqueEmail;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SignUpCommand
