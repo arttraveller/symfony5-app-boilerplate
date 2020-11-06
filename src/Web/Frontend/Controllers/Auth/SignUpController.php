@@ -7,7 +7,7 @@ use App\Core\Commands\Auth\SignUp\ConfirmEmailHandler;
 use App\Core\Commands\Auth\SignUp\SignUpCommand;
 use App\Core\Commands\Auth\SignUp\SignUpHandler;
 use App\Exceptions\EntityNotFoundException;
-use App\Web\Forms\Auth\SignUpForm;
+use App\Web\Frontend\Forms\Auth\SignUpForm;
 use App\Web\Frontend\Controllers\FrontendController;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;

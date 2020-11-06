@@ -8,7 +8,7 @@ use App\Core\Commands\Auth\PasswordReset\RequestPasswordResetHandler;
 use App\Exceptions\EntityNotFoundException;
 use App\Exceptions\ResetTokenAlreadyRequestedException;
 use App\Exceptions\UserNotActiveException;
-use App\Web\Forms\Auth\RequestPasswordResetForm;
+use App\Web\Frontend\Forms\Auth\RequestPasswordResetForm;
 use App\Web\Frontend\Controllers\FrontendController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

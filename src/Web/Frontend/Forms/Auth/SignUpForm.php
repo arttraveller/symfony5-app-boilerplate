@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Web\Forms\Auth;
+namespace App\Web\Frontend\Forms\Auth;
 
 use App\Core\Commands\Auth\SignUp\SignUpCommand;
 use Symfony\Component\Form\AbstractType;
