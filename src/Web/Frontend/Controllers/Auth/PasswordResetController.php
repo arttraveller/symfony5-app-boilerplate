@@ -2,12 +2,14 @@
 
 namespace App\Web\Frontend\Controllers\Auth;
 
+use App\Core\Commands\Auth\PasswordReset\PasswordResetCommand;
 use App\Core\Commands\Auth\PasswordReset\PasswordResetHandler;
 use App\Core\Commands\Auth\PasswordReset\RequestPasswordResetCommand;
 use App\Core\Commands\Auth\PasswordReset\RequestPasswordResetHandler;
 use App\Exceptions\EntityNotFoundException;
 use App\Exceptions\ResetTokenAlreadyRequestedException;
 use App\Exceptions\UserNotActiveException;
+use App\Web\Frontend\Forms\Auth\PasswordResetForm;
 use App\Web\Frontend\Forms\Auth\RequestPasswordResetForm;
 use App\Web\Frontend\Controllers\FrontendController;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +59,19 @@ class PasswordResetController extends FrontendController
      */
     public function reset(string $resetToken, Request $request, PasswordResetHandler $handler): Response
     {
-        // TODO
+        $command = new PasswordResetCommand($resetToken);
+        $form = $this->createForm(PasswordResetForm::class, $command);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $handler->handle($command);
+            $this->addFlash('success', 'Password was successfully changed.');
+            return $this->redirectToRoute('mainpage');
+        }
+
+        return $this->render('frontend/auth/passwordReset/reset.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 }

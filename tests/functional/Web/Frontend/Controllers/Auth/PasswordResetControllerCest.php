@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Core\Entities\User\ResetToken;
+use App\Core\Entities\User\User;
 use App\Core\Repositories\UsersRepository;
 use App\DataFixtures\UsersFixtures;
 
@@ -60,6 +61,31 @@ class PasswordResetControllerCest
         $usersRepository = $I->grabService(UsersRepository::class);
         $user = $usersRepository->getOneByEmail(UsersFixtures::CONFIRMED_USER_EMAIL);
         $I->assertNotEmpty($user->getResetToken()->getToken());
+    }
+
+
+    public function testResetOk(FunctionalTester $I)
+    {
+        $token = 'reset_token';
+        $usersRepository = $I->grabService(UsersRepository::class);
+        /** @var User $user */
+        $user = $usersRepository->getOneByEmail(UsersFixtures::CONFIRMED_USER_EMAIL);
+        $oldPasswordHash = $user->getPasswordHash();
+        $resetToken = new ResetToken($token);
+        $user->requestPasswordReset($resetToken);
+        $usersRepository->flush();
+
+        $I->amOnPage('/password/reset/' . $token);
+        $I->seeResponseCodeIs(200);
+        $I->fillField('Password', 'NewPassword');
+        $I->click('Save password');
+
+        $I->seeResponseCodeIs(200);
+        $I->seeCurrentUrlEquals('/');
+        $I->see('Password was successfully changed.', 'div.alert-success');
+
+        $user = $usersRepository->getOneByEmail(UsersFixtures::CONFIRMED_USER_EMAIL);
+        $I->assertNotEquals($user->getPasswordHash(), $oldPasswordHash);
     }
 
 }
