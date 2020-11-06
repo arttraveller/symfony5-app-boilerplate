@@ -63,5 +63,9 @@ class SignUpControllerCest
         $I->seeResponseCodeIs(200);
         $I->seeCurrentUrlEquals('/');
         $I->see('Email is successfully confirmed.', 'div.alert-success');
+
+        $usersRepository = $I->grabService(UsersRepository::class);
+        $user = $usersRepository->getOneByEmail(UsersFixtures::UNCONFIRMED_USER_EMAIL);
+        $I->assertTrue($user->isActive());
     }
 }

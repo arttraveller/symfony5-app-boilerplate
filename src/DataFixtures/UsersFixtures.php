@@ -12,6 +12,7 @@ class UsersFixtures extends Fixture
 {
     public const CONFIRMED_USER_EMAIL = 'user@example.com';
     public const CONFIRMED_USER_PASSwORD = 'password';
+    public const UNCONFIRMED_USER_EMAIL = 'unconfirmed@example.com';
     public const UNCONFIRMED_USER_TOKEN = 'confirmTokenHere';
 
     private PasswordHasher $passwordHasher;
@@ -50,7 +51,7 @@ class UsersFixtures extends Fixture
     public function createUnconfirmedUser(): User
     {
         $user = User::registerByEmail(
-            'unconfirmed@example.com',
+            self::UNCONFIRMED_USER_EMAIL,
             $this->passwordHasher->hash('password'),
             self::UNCONFIRMED_USER_TOKEN
         );
