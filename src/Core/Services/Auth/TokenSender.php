@@ -37,4 +37,10 @@ class TokenSender
         $this->mailer->send($email);
     }
 
+
+    public function sendResetToken(string $toEmail, string $resetToken): void
+    {
+        // TODO
+    }
+
 }
