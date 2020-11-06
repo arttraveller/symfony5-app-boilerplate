@@ -1,0 +1,16 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Password reset{% endblock %}
+
+{% block body %}
+
+    <h2>Password reset</h2>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Reset</button>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

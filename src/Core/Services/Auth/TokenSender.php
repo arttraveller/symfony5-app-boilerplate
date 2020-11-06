@@ -2,6 +2,7 @@
 
 namespace App\Core\Services\Auth;
 
+use App\Core\Entities\User\ResetToken;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Twig\Environment;
@@ -38,9 +39,22 @@ class TokenSender
     }
 
 
-    public function sendResetToken(string $toEmail, string $resetToken): void
+    public function sendResetToken(string $toEmail, ResetToken $resetToken): void
     {
         // TODO
+        $fromEmail = $_ENV['APP_FROM_EMAIL'];
+        $subject = 'You requested password reset';
+
+        $email = (new TemplatedEmail())
+            ->from($fromEmail)
+            ->to($toEmail)
+            ->subject($subject)
+            ->htmlTemplate('email/auth/password_reset.html.twig')
+            ->context([
+                'resetToken' => $resetToken->getToken(),
+            ]);
+
+        $this->mailer->send($email);
     }
 
 }

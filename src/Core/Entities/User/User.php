@@ -4,6 +4,7 @@ namespace App\Core\Entities\User;
 
 use App\Core\Entities\Entity;
 use App\Exceptions\DomainException;
+use App\Exceptions\ResetTokenAlreadyRequestedException;
 use App\Exceptions\UserNotActiveException;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
@@ -167,7 +168,7 @@ class User extends Entity
             throw new UserNotActiveException('User is not active');
         }
         if ($this->resetToken && !$this->resetToken->isExpired()) {
-            throw new DomainException('Reset token was already requested');
+            throw new ResetTokenAlreadyRequestedException('Reset token was already requested');
         }
         $this->resetToken = $newToken;
     }
