@@ -22,7 +22,6 @@ class SignInControllerCest
         $I->see('Username could not be found.', 'div.alert-danger');
     }
 
-
     public function testSignInWithIncorrectPassword(FunctionalTester $I)
     {
         $I->amOnPage('/signin');
@@ -33,6 +32,19 @@ class SignInControllerCest
 
         $I->seeCurrentUrlEquals('/signin');
         $I->see('Invalid credentials.', 'div.alert-danger');
+    }
+
+
+    public function testSignInUnconfirmedUser(FunctionalTester $I)
+    {
+        $I->amOnPage('/signin');
+        $I->seeResponseCodeIs(200);
+        $I->fillField('Email', UsersFixtures::UNCONFIRMED_USER_EMAIL);
+        $I->fillField('Password', 'password');
+        $I->click('Sign in');
+
+        $I->seeCurrentUrlEquals('/signin');
+        $I->see('Your user account is not active.', 'div.alert-danger');
     }
 
 
