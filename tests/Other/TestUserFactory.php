@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Other\Factories;
+namespace App\Tests\Other;
 
 use App\Core\Entities\User\User;
 

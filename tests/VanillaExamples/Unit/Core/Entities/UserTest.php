@@ -3,8 +3,7 @@
 namespace App\Tests\Unit\Core\Entities;
 
 use App\Core\Entities\User\ResetToken;
-use App\Exceptions\DomainException;
-use App\Tests\Other\Factories\TestUserFactory;
+use App\Tests\Other\TestUserFactory;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase

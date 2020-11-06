@@ -4,7 +4,6 @@ namespace App\Tests;
 
 use App\Core\Entities\User\User;
 use App\DataFixtures\UsersFixtures;
-use App\Tests\Other\Factories\TestUserFactory;
 
 class UsersRepositoryCest
 {

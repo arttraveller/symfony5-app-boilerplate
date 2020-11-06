@@ -3,7 +3,7 @@
 namespace App\Tests;
 
 use App\Core\Entities\User\ResetToken;
-use App\Tests\Other\Factories\TestUserFactory;
+use App\Tests\Other\TestUserFactory;
 
 class UserTest extends \Codeception\Test\Unit
 {
