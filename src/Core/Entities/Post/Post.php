@@ -2,6 +2,7 @@
 
 namespace App\Core\Entities\Post;
 
+use App\Core\Entities\Entity;
 use App\Core\Entities\User\User;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     name="posts",
  * )
  */
-class Post
+class Post extends Entity
 {
     /**
      * @ORM\Id
