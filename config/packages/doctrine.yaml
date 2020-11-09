@@ -16,3 +16,9 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Core/Entities/User'
                 prefix: 'App\Core\Entities\User'
                 alias: User
+            Post:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Core/Entities/Post'
+                prefix: 'App\Core\Entities\Post'
+                alias: Post

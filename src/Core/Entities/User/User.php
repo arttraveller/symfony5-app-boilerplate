@@ -3,10 +3,13 @@
 namespace App\Core\Entities\User;
 
 use App\Core\Entities\Entity;
+use App\Core\Entities\Post\Post;
 use App\Exceptions\DomainException;
 use App\Exceptions\ResetTokenAlreadyRequestedException;
 use App\Exceptions\UserNotActiveException;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,12 +66,18 @@ class User extends Entity
      */
     private DateTimeImmutable $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
+     */
+    private Collection $posts;
+
 
 
     private function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
         $this->resetToken = null;
+        $this->posts = new ArrayCollection();
     }
 
 
@@ -188,6 +197,14 @@ class User extends Entity
         }
         $this->passwordHash = $passwordHash;
         $this->resetToken = null;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
     }
 
 }
