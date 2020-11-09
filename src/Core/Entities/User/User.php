@@ -124,6 +124,12 @@ class User extends Entity
     }
 
 
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+
     public function getResetToken(): ?ResetToken
     {
         return $this->resetToken;

@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Core\Entities\User\User;
+use App\Core\Repositories\UsersRepository;
 use App\DataFixtures\UsersFixtures;
 
 class UsersRepositoryCest
@@ -13,8 +14,8 @@ class UsersRepositoryCest
 
     public function testRepoOk(FunctionalTester $I)
     {
-        $I->seeInRepository(User::class, [
-            'email' => UsersFixtures::CONFIRMED_USER_EMAIL,
-        ]);
+        $usersRepo = $I->grabService(UsersRepository::class);
+        $user = $usersRepo->getOneByEmail(UsersFixtures::CONFIRMED_USER_EMAIL);
+        $I->assertInstanceOf(User::class, $user);
     }
 }

@@ -81,4 +81,10 @@ class Post extends Entity
     {
         return $this->user;
     }
+
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
 }

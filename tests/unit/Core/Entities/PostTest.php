@@ -33,6 +33,7 @@ class PostTest extends \Codeception\Test\Unit
         $this->assertEquals($userEmail, $newPost->getUser()->getEmail());
         $this->assertEquals($title, $newPost->getTitle());
         $this->assertEquals($text, $newPost->getText());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $newPost->getCreatedAt());
     }
 
 }

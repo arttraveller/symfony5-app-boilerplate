@@ -28,12 +28,13 @@ class UserTest extends \Codeception\Test\Unit
             $passwordHash = 'password_hash',
             $confirmToken = 'confirm_token'
         );
+
         $this->assertEquals($email, $user->getEmail());
         $this->assertEquals($passwordHash, $user->getPasswordHash());
         $this->assertEquals($confirmToken, $user->getConfirmToken());
-
         $this->assertTrue($user->isWait());
         $this->assertFalse($user->isActive());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedAt());
     }
 
 
