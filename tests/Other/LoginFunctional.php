@@ -2,8 +2,11 @@
 
 namespace App\Tests\Other;
 
+use App\Core\Entities\User\User;
+use App\Core\Repositories\UsersRepository;
 use App\DataFixtures\UsersFixtures;
 use App\Tests\FunctionalTester;
+use Symfony\Component\Security\Core\Security;
 
 trait LoginFunctional
 {
@@ -15,4 +18,12 @@ trait LoginFunctional
         $I->click('Sign in');
     }
 
+
+    protected function getCurrentUser(FunctionalTester $I): User
+    {
+        $security = $I->grabService(Security::class);
+        $usersRepository = $I->grabService(UsersRepository::class);
+
+        return $usersRepository->getOneById($security->getUser()->getId());
+    }
 }

@@ -10,10 +10,22 @@ class SignInControllerCest
     {
     }
 
-    public function testSignInUnknownUser(FunctionalTester $I)
+    public function testSignInOk(FunctionalTester $I)
     {
         $I->amOnPage('/signin');
         $I->seeResponseCodeIs(200);
+        $I->see('Please sign in', 'h2');
+        $I->fillField('Email', UsersFixtures::CONFIRMED_USER_EMAIL);
+        $I->fillField('Password', UsersFixtures::CONFIRMED_USER_PASSwORD);
+        $I->click('Sign in');
+
+        $I->seeCurrentUrlEquals('/');
+        $I->seeLink('Log Out', '/logout');
+    }
+
+    public function testSignInUnknownUser(FunctionalTester $I)
+    {
+        $I->amOnPage('/signin');
         $I->fillField('Email', 'unknown@example.com');
         $I->fillField('Password', 'password');
         $I->click('Sign in');
@@ -25,7 +37,6 @@ class SignInControllerCest
     public function testSignInWithIncorrectPassword(FunctionalTester $I)
     {
         $I->amOnPage('/signin');
-        $I->seeResponseCodeIs(200);
         $I->fillField('Email', UsersFixtures::CONFIRMED_USER_EMAIL);
         $I->fillField('Password', '1234512345');
         $I->click('Sign in');
@@ -38,7 +49,6 @@ class SignInControllerCest
     public function testSignInUnconfirmedUser(FunctionalTester $I)
     {
         $I->amOnPage('/signin');
-        $I->seeResponseCodeIs(200);
         $I->fillField('Email', UsersFixtures::UNCONFIRMED_USER_EMAIL);
         $I->fillField('Password', 'password');
         $I->click('Sign in');
@@ -46,18 +56,4 @@ class SignInControllerCest
         $I->seeCurrentUrlEquals('/signin');
         $I->see('Your user account is not active.', 'div.alert-danger');
     }
-
-
-    public function testSignInOk(FunctionalTester $I)
-    {
-        $I->amOnPage('/signin');
-        $I->seeResponseCodeIs(200);
-        $I->fillField('Email', UsersFixtures::CONFIRMED_USER_EMAIL);
-        $I->fillField('Password', UsersFixtures::CONFIRMED_USER_PASSwORD);
-        $I->click('Sign in');
-
-        $I->seeCurrentUrlEquals('/');
-        $I->seeLink('Log Out', '/logout');
-    }
-
 }

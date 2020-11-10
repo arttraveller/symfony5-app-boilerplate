@@ -11,6 +11,25 @@ class SignUpControllerCest
     {
     }
 
+    public function testSignUpOk(FunctionalTester $I)
+    {
+        $I->amOnPage('/signup');
+        $I->seeResponseCodeIs(200);
+        $I->seeElement('form', ['name' => 'sign_up_form']);
+        $I->fillField('Email', $title = 'new-user@example.com');
+        $I->fillField('Password', $text = 'password');
+        $I->click('Sign up');
+
+        $I->seeResponseCodeIs(200);
+        $I->seeCurrentUrlEquals('/');
+        $I->see('Registration completed successfully.', 'div.alert-success');
+
+        // User in DB?
+        $usersRepository = $I->grabService(UsersRepository::class);
+        $newUser = $usersRepository->getOneByEmail('new-user@example.com');
+        $I->assertFalse($newUser->isActive());
+    }
+
 
     public function testSignUpWithInvalidData(FunctionalTester $I)
     {
@@ -35,25 +54,6 @@ class SignUpControllerCest
 
         $I->seeCurrentUrlEquals('/signup');
         $I->see('Email already in use.', 'span.form-error-message');
-    }
-
-
-    public function testSignUpOk(FunctionalTester $I)
-    {
-        $I->amOnPage('/signup');
-        $I->seeResponseCodeIs(200);
-        $I->submitForm('form[name=sign_up_form]', [
-            'sign_up_form[email]' => 'new-user@example.com',
-            'sign_up_form[password]' => 'password',
-        ]);
-
-        $I->seeResponseCodeIs(200);
-        $I->seeCurrentUrlEquals('/');
-        $I->see('Registration completed successfully.', 'div.alert-success');
-
-        // User in DB?
-        $usersRepository = $I->grabService(UsersRepository::class);
-        $newUser = $usersRepository->getOneByEmail('new-user@example.com');
     }
 
 
