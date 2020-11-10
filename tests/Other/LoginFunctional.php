@@ -7,7 +7,7 @@ use App\Tests\FunctionalTester;
 
 trait LoginFunctional
 {
-    public function login(FunctionalTester $I, $email = UsersFixtures::CONFIRMED_USER_EMAIL, $password = UsersFixtures::CONFIRMED_USER_PASSwORD): void
+    protected function login(FunctionalTester $I, $email = UsersFixtures::CONFIRMED_USER_EMAIL, $password = UsersFixtures::CONFIRMED_USER_PASSwORD): void
     {
         $I->amOnPage('/signin');
         $I->fillField('Email', $email);

@@ -33,4 +33,10 @@ class UsersRepository extends Repository
         return $this->getOneBy(['email' => $email]);
     }
 
+
+    public function getOneById(int $id): User
+    {
+        return $this->getOneBy(['id' => $id]);
+    }
+
 }

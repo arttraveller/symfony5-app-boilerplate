@@ -1,0 +1,16 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Create new post{% endblock %}
+
+{% block body %}
+
+    <h2>Create new post</h2>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

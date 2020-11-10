@@ -16,10 +16,7 @@ class UserIdentity implements UserInterface
     }
 
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->user->getId();
     }
