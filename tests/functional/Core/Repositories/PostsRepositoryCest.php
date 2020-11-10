@@ -15,7 +15,7 @@ class PostsRepositoryCest
     public function testRepoOk(FunctionalTester $I)
     {
         $postsRepo = $I->grabService(PostsRepository::class);
-        $post = $postsRepo->getOneBy(['title' => PostsFixtures::POST1_TITLE]);
+        $post = $postsRepo->getOneBy(['title' => PostsFixtures::LAST_POST_TITLE]);
         $I->assertInstanceOf(Post::class, $post);
     }
 }

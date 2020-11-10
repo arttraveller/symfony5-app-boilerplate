@@ -4,6 +4,33 @@
 
 {% block body %}
 
-    <h2>TODO</h2>
+    <h2>Posts</h2>
+
+    <div class="control">
+        <a href="{{ path('posts_create') }}" class="btn btn-success">Add</a>
+    </div>
+
+    <div class="box mt-4 posts">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in pagination %}
+                    <tr>
+                        <td class="post-title">{{ post.title }}</td>
+                        <td class="post-created">{{ post.createdAt|date("d.m.Y") }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Core\Entities\Post\Post;
+use App\DataFixtures\PostsFixtures;
 use App\Tests\Other\LoginFunctional;
 
 class PostsControllerCest
@@ -11,6 +12,15 @@ class PostsControllerCest
 
     public function _before(FunctionalTester $I)
     {
+    }
+
+    public function testIndexOk(FunctionalTester $I)
+    {
+        $this->login($I);
+        $I->amOnPage('/posts');
+        $I->seeResponseCodeIs(200);
+        $I->seeElement('div.posts');
+        $I->see(PostsFixtures::LAST_POST_TITLE, 'td.post-title');
     }
 
     public function testCreateOk(FunctionalTester $I)
