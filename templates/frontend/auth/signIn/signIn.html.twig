@@ -30,13 +30,20 @@
            value="{{ csrf_token('authenticate') }}"
     >
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
+    <div class="row">
+        <div class="col-6 checkbox">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+        <div class="col-6">
+            <div class="float-right">
+                <a href="{{ path('auth_password_reset_request') }}">Forgot password?</a>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-3">
         <button class="btn btn-primary" type="submit">
             Sign in
         </button>

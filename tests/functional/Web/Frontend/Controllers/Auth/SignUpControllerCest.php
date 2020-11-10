@@ -18,7 +18,7 @@ class SignUpControllerCest
         $I->seeElement('form', ['name' => 'sign_up_form']);
         $I->fillField('Email', $title = 'new-user@example.com');
         $I->fillField('Password', $text = 'password');
-        $I->click('Sign up');
+        $I->click('Sign up', '.btn');
 
         $I->seeResponseCodeIs(200);
         $I->seeCurrentUrlEquals('/');

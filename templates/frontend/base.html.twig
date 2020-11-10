@@ -32,17 +32,17 @@
                     <ul class="navbar-nav ml-auto">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('auth_logout') }}">Log Out</a>
+                                <a class="nav-link" href="{{ path('posts_index') }}">Posts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('auth_logout') }}">Sign out</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('auth_login') }}">Sign In</a>
+                                <a class="nav-link" href="{{ path('auth_login') }}">Sign in</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('auth_signup') }}">Sign Up</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('auth_password_reset_request') }}">Reset password</a>
+                                <a class="nav-link" href="{{ path('auth_signup') }}">Sign up</a>
                             </li>
                         {% endif %}
                     </ul>

@@ -15,7 +15,7 @@ trait LoginFunctional
         $I->amOnPage('/signin');
         $I->fillField('Email', $email);
         $I->fillField('Password', $password);
-        $I->click('Sign in');
+        $I->click('Sign in', '.btn');
     }
 
 

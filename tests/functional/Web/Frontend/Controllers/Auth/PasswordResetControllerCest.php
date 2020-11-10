@@ -48,14 +48,15 @@ class PasswordResetControllerCest
 
     public function testRequestOk(FunctionalTester $I)
     {
-        $I->amOnPage('/password/reset');
+        $I->amOnPage('/signin');
+        $I->seeLink('Forgot password?');
+        $I->click('Forgot password?');
         $I->seeResponseCodeIs(200);
-        $I->submitForm('form[name=request_password_reset_form]', [
-            'request_password_reset_form[email]' => UsersFixtures::CONFIRMED_USER_EMAIL,
-        ]);
+        $I->seeCurrentUrlEquals('/password/reset');
+        $I->fillField('Email', UsersFixtures::CONFIRMED_USER_EMAIL);
+        $I->click('Reset');
 
         $I->seeResponseCodeIs(200);
-        $I->seeCurrentUrlEquals('/');
         $I->see('The email with further instructions was sent to the submitted email address.', 'div.alert-success');
 
         $usersRepository = $I->grabService(UsersRepository::class);
