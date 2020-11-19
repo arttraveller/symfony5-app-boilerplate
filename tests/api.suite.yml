@@ -1,0 +1,8 @@
+actor: ApiTester
+modules:
+    enabled:
+       - REST:
+          url: http://mainhost:8080/api/v1/
+          depends: PhpBrowser
+          part: Json
+       - \App\Tests\Helper\Api

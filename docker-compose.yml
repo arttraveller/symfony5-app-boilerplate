@@ -28,6 +28,8 @@ services:
             - ./:/app
         depends_on:
             - app-postgres
+        extra_hosts:
+            - "mainhost:172.17.0.1"
         tty: true
 
     app-postgres:

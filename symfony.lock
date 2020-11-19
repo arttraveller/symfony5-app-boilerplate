@@ -47,6 +47,9 @@
     "codeception/module-phpbrowser": {
         "version": "1.0.2"
     },
+    "codeception/module-rest": {
+        "version": "1.2.7"
+    },
     "codeception/module-symfony": {
         "version": "1.2.0"
     },
@@ -164,6 +167,9 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.7.0"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.10"
     },
     "knplabs/knp-components": {
         "version": "v2.4.2"
@@ -325,6 +331,9 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "softcreatr/jsonpath": {
+        "version": "0.7.2"
     },
     "symfony/asset": {
         "version": "v5.1.8"

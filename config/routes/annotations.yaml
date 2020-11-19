@@ -1,3 +1,9 @@
 web:
     resource: ../../src/Web/Frontend/Controllers/
     type: annotation
+
+api:
+    resource: ../../src/Api/Controllers/
+    prefix: /api/v1
+    name_prefix: api_
+    type: annotation

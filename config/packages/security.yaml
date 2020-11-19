@@ -39,4 +39,6 @@ security:
         - { path: ^/signin, roles: PUBLIC_ACCESS }
         - { path: ^/signup, roles: PUBLIC_ACCESS }
         - { path: ^/password/reset, roles: PUBLIC_ACCESS }
+        # TODO
+        - { path: ^/api, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

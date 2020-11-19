@@ -17,6 +17,9 @@ php-cli:
 tests-all:
 	docker-compose exec app-php-cli php vendor/bin/codecept run
 
+tests-api:
+	docker-compose exec app-php-cli php vendor/bin/codecept run api
+
 tests-functional:
 	docker-compose exec app-php-cli php vendor/bin/codecept run functional
 
