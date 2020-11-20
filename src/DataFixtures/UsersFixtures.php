@@ -11,7 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 class UsersFixtures extends Fixture
 {
     public const CONFIRMED_USER_EMAIL = 'user@example.com';
-    public const CONFIRMED_USER_PASSwORD = 'password';
+    public const CONFIRMED_USER_PASSWORD = 'password';
     public const UNCONFIRMED_USER_EMAIL = 'unconfirmed@example.com';
     public const UNCONFIRMED_USER_TOKEN = 'confirmTokenHere';
 
@@ -39,7 +39,7 @@ class UsersFixtures extends Fixture
     {
         $user = User::registerByEmail(
             self::CONFIRMED_USER_EMAIL,
-            $this->passwordHasher->hash(self::CONFIRMED_USER_PASSwORD),
+            $this->passwordHasher->hash(self::CONFIRMED_USER_PASSWORD),
             $this->tokenizer->generateConfirmToken()
         );
         $user->confirmRegistration();

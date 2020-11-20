@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Security;
 
 trait LoginFunctional
 {
-    protected function login(FunctionalTester $I, $email = UsersFixtures::CONFIRMED_USER_EMAIL, $password = UsersFixtures::CONFIRMED_USER_PASSwORD): void
+    protected function login(FunctionalTester $I, $email = UsersFixtures::CONFIRMED_USER_EMAIL, $password = UsersFixtures::CONFIRMED_USER_PASSWORD): void
     {
         $I->amOnPage('/signin');
         $I->fillField('Email', $email);

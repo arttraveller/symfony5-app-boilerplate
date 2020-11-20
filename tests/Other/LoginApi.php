@@ -7,7 +7,7 @@ use App\Tests\ApiTester;
 
 trait LoginApi
 {
-    protected function login(ApiTester $I, $email = UsersFixtures::CONFIRMED_USER_EMAIL, $password = UsersFixtures::CONFIRMED_USER_PASSwORD): string
+    protected function login(ApiTester $I, $email = UsersFixtures::CONFIRMED_USER_EMAIL, $password = UsersFixtures::CONFIRMED_USER_PASSWORD): string
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPost('/signin', [

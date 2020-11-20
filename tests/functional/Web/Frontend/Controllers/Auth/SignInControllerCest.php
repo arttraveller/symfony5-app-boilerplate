@@ -16,7 +16,7 @@ class SignInControllerCest
         $I->seeResponseCodeIs(200);
         $I->see('Please sign in', 'h2');
         $I->fillField('Email', UsersFixtures::CONFIRMED_USER_EMAIL);
-        $I->fillField('Password', UsersFixtures::CONFIRMED_USER_PASSwORD);
+        $I->fillField('Password', UsersFixtures::CONFIRMED_USER_PASSWORD);
         $I->click('Sign in', '.btn');
 
         $I->seeCurrentUrlEquals('/');

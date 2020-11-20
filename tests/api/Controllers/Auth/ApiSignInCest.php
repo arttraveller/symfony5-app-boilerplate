@@ -12,7 +12,7 @@ class ApiSignInCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPost('/signin', [
             'username' => UsersFixtures::CONFIRMED_USER_EMAIL,
-            'password' => UsersFixtures::CONFIRMED_USER_PASSwORD
+            'password' => UsersFixtures::CONFIRMED_USER_PASSWORD
         ]);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
@@ -26,7 +26,7 @@ class ApiSignInCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPost('/signin', [
             'username' => 'unknown@example.com',
-            'password' => UsersFixtures::CONFIRMED_USER_PASSwORD
+            'password' => UsersFixtures::CONFIRMED_USER_PASSWORD
         ]);
         $I->seeResponseCodeIs(401);
         $I->seeResponseContainsJson([
