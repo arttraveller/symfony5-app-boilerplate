@@ -6,10 +6,31 @@ security:
         # the name of your user provider can be anything
         custom_user_provider:
             id: App\Security\UserProvider
+
+    encoders:
+        App\Security\UserIdentity:
+            algorithm: auto
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        api_signin:
+            pattern:  ^/api/v1/signin
+            stateless: true
+            json_login:
+                check_path:               /api/v1/signin
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern:   ^/api
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         main:
             pattern: ^/
             user_checker: App\Security\UserChecker
@@ -35,10 +56,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        # Web
         - { path: ^/$, roles: PUBLIC_ACCESS }
         - { path: ^/signin, roles: PUBLIC_ACCESS }
         - { path: ^/signup, roles: PUBLIC_ACCESS }
         - { path: ^/password/reset, roles: PUBLIC_ACCESS }
-        # TODO
-        - { path: ^/api, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        # API
+        - { path: ^/api/v1/signin, roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

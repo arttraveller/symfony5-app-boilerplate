@@ -3,12 +3,17 @@
 namespace App\Tests;
 
 use App\DataFixtures\PostsFixtures;
+use App\Tests\Other\LoginApi;
 
 class ApiPostsControllerCest
 {
+    use LoginApi;
 
-    public function testListOk(ApiTester $I)
+
+    public function testIndexOk(ApiTester $I)
     {
+        $accessToken = $this->login($I);
+        $I->amBearerAuthenticated($accessToken);
         $I->sendGet('/posts');
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
