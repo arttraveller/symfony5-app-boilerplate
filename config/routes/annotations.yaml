@@ -7,3 +7,5 @@ api:
     prefix: /api/v1
     name_prefix: api_
     type: annotation
+    defaults:
+        _format: json
