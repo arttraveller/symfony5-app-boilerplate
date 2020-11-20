@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Controllers;
+namespace App\Ui\Api\Controllers;
 
 use App\Core\Entities\User\User;
 use App\Exceptions\DomainException;

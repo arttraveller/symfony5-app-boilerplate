@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Web\Frontend\Controllers\Auth;
+namespace App\Ui\Web\Frontend\Controllers\Auth;
 
 use App\Core\Commands\Auth\SignUp\ConfirmEmailCommand;
 use App\Core\Commands\Auth\SignUp\ConfirmEmailHandler;
 use App\Core\Commands\Auth\SignUp\SignUpCommand;
 use App\Core\Commands\Auth\SignUp\SignUpHandler;
 use App\Exceptions\EntityNotFoundException;
-use App\Web\Frontend\Forms\Auth\SignUpForm;
-use App\Web\Frontend\Controllers\FrontendController;
+use App\Ui\Web\Frontend\Forms\Auth\SignUpForm;
+use App\Ui\Web\Frontend\Controllers\FrontendController;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,9 +1,9 @@
 web:
-    resource: ../../src/Web/Frontend/Controllers/
+    resource: ../../src/Ui/Web/Frontend/Controllers/
     type: annotation
 
 api:
-    resource: ../../src/Api/Controllers/
+    resource: ../../src/Ui/Api/Controllers/
     prefix: /api/v1
     name_prefix: api_
     type: annotation

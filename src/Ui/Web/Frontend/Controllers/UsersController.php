@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Web\Frontend\Controllers;
+namespace App\Ui\Web\Frontend\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

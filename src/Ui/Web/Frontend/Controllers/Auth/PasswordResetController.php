@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Web\Frontend\Controllers\Auth;
+namespace App\Ui\Web\Frontend\Controllers\Auth;
 
 use App\Core\Commands\Auth\PasswordReset\PasswordResetCommand;
 use App\Core\Commands\Auth\PasswordReset\PasswordResetHandler;
@@ -9,9 +9,9 @@ use App\Core\Commands\Auth\PasswordReset\RequestPasswordResetHandler;
 use App\Exceptions\EntityNotFoundException;
 use App\Exceptions\ResetTokenAlreadyRequestedException;
 use App\Exceptions\UserNotActiveException;
-use App\Web\Frontend\Forms\Auth\PasswordResetForm;
-use App\Web\Frontend\Forms\Auth\RequestPasswordResetForm;
-use App\Web\Frontend\Controllers\FrontendController;
+use App\Ui\Web\Frontend\Forms\Auth\PasswordResetForm;
+use App\Ui\Web\Frontend\Forms\Auth\RequestPasswordResetForm;
+use App\Ui\Web\Frontend\Controllers\FrontendController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

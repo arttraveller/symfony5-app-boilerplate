@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Web\Frontend\Controllers;
+namespace App\Ui\Web\Frontend\Controllers;
 
 use App\Core\Commands\Posts\CreatePostCommand;
 use App\Core\Commands\Posts\CreatePostHandler;
 use App\Core\Repositories\PostsRepository;
-use App\Web\Frontend\Forms\Posts\CreatePostForm;
+use App\Ui\Web\Frontend\Forms\Posts\CreatePostForm;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

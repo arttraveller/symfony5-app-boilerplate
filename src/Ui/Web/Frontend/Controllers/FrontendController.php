@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Web\Frontend\Controllers;
+namespace App\Ui\Web\Frontend\Controllers;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

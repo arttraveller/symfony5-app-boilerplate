@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Web\Frontend\Controllers\Auth;
+namespace App\Ui\Web\Frontend\Controllers\Auth;
 
-use App\Web\Frontend\Controllers\FrontendController;
+use App\Ui\Web\Frontend\Controllers\FrontendController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;

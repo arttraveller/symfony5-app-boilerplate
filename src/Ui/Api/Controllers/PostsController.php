@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Controllers;
+namespace App\Ui\Api\Controllers;
 
 use App\Core\Repositories\PostsRepository;
 use Symfony\Component\HttpFoundation\Request;
