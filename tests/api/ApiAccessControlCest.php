@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-use App\DataFixtures\PostsFixtures;
+use App\DataFixtures\UsersFixtures;
 use App\Tests\Other\LoginApi;
 
 class ApiAccessControlCest
@@ -11,7 +11,7 @@ class ApiAccessControlCest
 
     public function testRequestWithoutAccessToken(ApiTester $I)
     {
-        $I->sendGet('/posts');
+        $I->sendGet('/profile');
         $I->seeResponseCodeIs(401);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson([
@@ -23,7 +23,7 @@ class ApiAccessControlCest
     public function testRequestWithInvalidAccessToken(ApiTester $I)
     {
         $I->amBearerAuthenticated('12345');
-        $I->sendGet('/posts');
+        $I->sendGet('/profile');
         $I->seeResponseCodeIs(401);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson([
@@ -36,13 +36,11 @@ class ApiAccessControlCest
     {
         $accessToken = $this->login($I);
         $I->amBearerAuthenticated($accessToken);
-        $I->sendGet('/posts');
+        $I->sendGet('/profile');
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson([
-            'data' => [
-                'title' => PostsFixtures::LAST_POST_TITLE,
-            ]
+            'email' => UsersFixtures::CONFIRMED_USER_EMAIL,
         ]);
     }
 }

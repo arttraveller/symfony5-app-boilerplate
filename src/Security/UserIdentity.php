@@ -16,6 +16,12 @@ class UserIdentity implements UserInterface
     }
 
 
+    public function getEntity(): User
+    {
+        return $this->user;
+    }
+
+
     public function getId(): int
     {
         return $this->user->getId();
