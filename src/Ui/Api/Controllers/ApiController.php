@@ -2,27 +2,10 @@
 
 namespace App\Ui\Api\Controllers;
 
-use App\Core\Entities\User\User;
-use App\Exceptions\DomainException;
+use App\Ui\Shared\Traits\GetUserEntityFromController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class ApiController extends AbstractController
 {
-    /**
-     * Gets user entiny.
-     *
-     * @return User
-     *
-     * @throws DomainException if user not found
-     */
-    protected function getUserEntity(): User
-    {
-        $userIdentity = $this->getUser();
-        if ($userIdentity === null) {
-            throw new DomainException('User not found');
-        }
-
-        return $userIdentity->getEntity();
-    }
-
+    use GetUserEntityFromController;
 }

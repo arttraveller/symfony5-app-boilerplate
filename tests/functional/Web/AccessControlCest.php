@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\DataFixtures\UsersFixtures;
 use App\Tests\Other\LoginFunctional;
 
 class AccessControlCest
@@ -26,5 +27,6 @@ class AccessControlCest
         $this->login($I);
         $I->amOnPage('/profile');
         $I->see('Your profile', 'h2');
+        $I->see(UsersFixtures::CONFIRMED_USER_EMAIL, 'td');
     }
 }

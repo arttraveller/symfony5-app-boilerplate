@@ -14,7 +14,10 @@ class UsersController extends FrontendController
      */
     public function profile()
     {
+        $user = $this->getUserEntity();
+
         return $this->render('frontend/users/profile.html.twig', [
+            'email' => $user->getEmail(),
         ]);
     }
 }
