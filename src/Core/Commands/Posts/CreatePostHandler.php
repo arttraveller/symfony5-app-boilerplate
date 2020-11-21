@@ -22,12 +22,14 @@ class CreatePostHandler
     }
 
 
-    public function handle(CreatePostCommand $command): void
+    public function handle(CreatePostCommand $command): Post
     {
         // $user = $this->security->getUser()->getEntity();
         $userId = $this->security->getUser()->getId();
         $user = $this->usersRepo->getOneById($userId);
         $post = new Post($user, $command->title, $command->text);
         $this->postsRepo->add($post);
+
+        return $post;
     }
 }
