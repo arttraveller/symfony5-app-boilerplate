@@ -23,6 +23,12 @@ abstract class Repository extends ServiceEntityRepository implements RepositoryI
     }
 
 
+    public function remove(Entity $entity): void
+    {
+        $this->_em->remove($entity);
+    }
+
+
     public function flush(): void
     {
         $this->_em->flush();

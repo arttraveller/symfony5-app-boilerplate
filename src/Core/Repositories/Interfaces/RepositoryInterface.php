@@ -13,6 +13,8 @@ interface RepositoryInterface extends ObjectRepository
 
     public function persist(Entity $entity): void;
 
+    public function remove(Entity $entity): void;
+
     public function flush(): void;
 
     /**
