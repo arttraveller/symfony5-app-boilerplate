@@ -3,12 +3,26 @@
 namespace App\Ui\Shared\Traits;
 
 use App\Core\Entities\User\User;
+use App\Core\Repositories\UsersRepository;
 use App\Exceptions\DomainException;
 
 trait GetUserEntityFromController
 {
+
+    private UsersRepository $usersRepo;
+
+
     /**
-     * Gets user entiny.
+     * @required
+     */
+    public function setUsersRepo(UsersRepository $usersRepo): void
+    {
+        $this->usersRepo = $usersRepo;
+    }
+
+
+    /**
+     * Gets user entity.
      *
      * @return User
      *
@@ -21,7 +35,11 @@ trait GetUserEntityFromController
             throw new DomainException('User not found');
         }
 
-        return $userIdentity->getEntity();
+        // TODO check associations
+        // $user = $userIdentity->getEntity();
+        $user = $this->usersRepo->getOneById($userIdentity->getId());
+
+        return $user;
     }
 
 }
