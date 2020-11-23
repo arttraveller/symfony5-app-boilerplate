@@ -11,9 +11,4 @@ class PostsRepository extends Repository
     {
         parent::__construct($registry, Post::class);
     }
-
-    public function findAll()
-    {
-        return $this->findBy([], ['id' => 'DESC']);
-    }
 }

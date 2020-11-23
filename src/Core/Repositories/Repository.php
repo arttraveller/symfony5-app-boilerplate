@@ -34,6 +34,14 @@ abstract class Repository extends ServiceEntityRepository implements RepositoryI
         $this->_em->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function findAll(array $orderBy = ['id' => 'DESC']): array
+    {
+        return $this->findBy([], $orderBy);
+    }
+
 
     /**
      * {@inheritdoc}
