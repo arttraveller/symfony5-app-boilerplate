@@ -7,5 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class FrontendController extends AbstractController
 {
+    protected const PER_PAGE_DEFAULT = 10;
+
     use GetUserEntityFromController;
 }

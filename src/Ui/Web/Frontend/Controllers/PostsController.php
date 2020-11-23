@@ -44,7 +44,7 @@ class PostsController extends FrontendController
         $pagination = $paginator->paginate(
             $postsRepo->findAll(),
             $request->query->getInt('page', 1),
-            10
+            self::PER_PAGE_DEFAULT
         );
 
         return $this->render('frontend/posts/index.html.twig', [
