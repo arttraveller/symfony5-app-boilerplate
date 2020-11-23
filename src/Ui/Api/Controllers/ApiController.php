@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 abstract class ApiController extends AbstractController
 {
+    protected const PER_PAGE_DEFAULT = 20;
+
     use GetUserEntityFromController;
 
     protected SerializerInterface $serializer;

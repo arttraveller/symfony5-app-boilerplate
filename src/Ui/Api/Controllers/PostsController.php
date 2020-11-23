@@ -5,6 +5,7 @@ namespace App\Ui\Api\Controllers;
 use App\Core\Commands\Posts\CreatePostCommand;
 use App\Core\Commands\Posts\CreatePostHandler;
 use App\Core\Repositories\PostsRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,16 +32,25 @@ class PostsController extends ApiController
      * @Route("posts", name="posts_index", methods={"GET"})
      * @return Response
      */
-    public function posts(Request $request): Response
+    public function posts(Request $request, PaginatorInterface $paginator): Response
     {
-        $posts = $this->postsRepo->findAll();
+        $pagination = $paginator->paginate(
+            $this->postsRepo->findAll(),
+            $request->query->getInt('page', 1),
+            self::PER_PAGE_DEFAULT
+        );
 
         return $this->json([
-            'data' => array_map(fn($post) => [
+            'records' => array_map(fn($post) => [
                 'id' => $post->getId(),
                 'title' => $post->getTitle(),
                 'created_at' => $post->getCreatedAt(),
-            ], $posts),
+            ], (array)$pagination->getItems()),
+            'pagination' => [
+                'page' => $pagination->getCurrentPageNumber(),
+                'per_page' => $pagination->getItemNumberPerPage(),
+                'total' => $pagination->getTotalItemCount(),
+            ],
         ]);
     }
 

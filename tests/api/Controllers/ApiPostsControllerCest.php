@@ -18,8 +18,11 @@ class ApiPostsControllerCest
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson([
-            'data' => [
+            'records' => [
                 'title' => PostsFixtures::LAST_POST_TITLE,
+            ],
+            'pagination' => [
+                'page' => 1,
             ]
         ]);
     }
