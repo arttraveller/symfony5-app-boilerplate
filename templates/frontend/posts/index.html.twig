@@ -21,8 +21,12 @@
             <tbody>
                 {% for post in pagination %}
                     <tr>
-                        <td class="post-title">{{ post.title }}</td>
-                        <td class="post-created">{{ post.createdAt|date("d.m.Y") }}</td>
+                        <td class="post-title">
+                            <a href="{{ path('posts_show', {id: post.id}) }}">{{ post.title }}</a>
+                        </td>
+                        <td class="post-created">
+                            {{ post.createdAt|date("d.m.Y") }}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

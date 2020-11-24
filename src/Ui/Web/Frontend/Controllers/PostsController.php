@@ -4,6 +4,7 @@ namespace App\Ui\Web\Frontend\Controllers;
 
 use App\Core\Commands\Posts\CreatePostCommand;
 use App\Core\Commands\Posts\CreatePostHandler;
+use App\Core\Entities\Post\Post;
 use App\Core\Repositories\PostsRepository;
 use App\Ui\Web\Frontend\Forms\Posts\CreatePostForm;
 use Knp\Component\Pager\PaginatorInterface;
@@ -49,6 +50,18 @@ class PostsController extends FrontendController
 
         return $this->render('frontend/posts/index.html.twig', [
             'pagination' => $pagination,
+        ]);
+    }
+
+
+    /**
+     * @Route("/posts/{id}", name="posts_show")
+     * @return Response
+     */
+    public function show(Post $post): Response
+    {
+        return $this->render('frontend/posts/show.html.twig', [
+            'post' => $post,
         ]);
     }
 }

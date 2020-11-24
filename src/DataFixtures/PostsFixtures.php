@@ -11,6 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 class PostsFixtures extends Fixture implements DependentFixtureInterface
 {
     public const LAST_POST_TITLE = 'Last post';
+    public const LAST_POST_TEXT = 'Last post content here...';
 
     private UsersRepository $usersRepo;
 
@@ -33,17 +34,17 @@ class PostsFixtures extends Fixture implements DependentFixtureInterface
             $post = $this->createPost();
             $manager->persist($post);
         }
-        $post = $this->createPost(self::LAST_POST_TITLE);
+        $post = $this->createPost(self::LAST_POST_TITLE, self::LAST_POST_TEXT);
         $manager->persist($post);
 
         $manager->flush();
     }
 
-    private function createPost($title = 'Random post'): Post
+    private function createPost($title = 'Random post', $text = 'Post content here...'): Post
     {
         $user = $this->usersRepo->getOneByEmail(UsersFixtures::CONFIRMED_USER_EMAIL);
 
-        return new Post($user, $title, 'Post content here...');
+        return new Post($user, $title, $text);
     }
 
 }
