@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\Core\Repositories\PostsRepository;
 use App\DataFixtures\PostsFixtures;
 use App\Tests\Other\LoginApi;
 
@@ -62,6 +63,27 @@ class ApiPostsControllerCest
             'title' => [
                 'This value should not be blank.',
             ],
+        ]);
+    }
+
+
+    public function testShowOk(ApiTester $I)
+    {
+        $postsRepo = $I->grabService(PostsRepository::class);
+        $post = $postsRepo->getOneBy(['title' => PostsFixtures::LAST_POST_TITLE]);
+
+        $accessToken = $this->login($I);
+        $I->amBearerAuthenticated($accessToken);
+        $I->sendGet('/posts/' . $post->getId(), []);
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseMatchesJsonType([
+            'id' => 'integer',
+            'title' => 'string',
+            'text' => 'string',
+            'created_at' => 'string:date'
+        ]);
+        $I->seeResponseContainsJson([
+            'title' => PostsFixtures::LAST_POST_TITLE,
         ]);
     }
 }

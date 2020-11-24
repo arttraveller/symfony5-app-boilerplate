@@ -1,6 +1,12 @@
 actor: ApiTester
 modules:
     enabled:
+       - Symfony:
+            app_path: 'src'
+            environment: 'test'
+       - Doctrine2:
+           depends: Symfony
+           cleanup: true
        - REST:
           url: http://mainhost:8080/api/v1/
           depends: PhpBrowser

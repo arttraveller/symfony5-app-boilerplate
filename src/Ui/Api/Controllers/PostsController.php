@@ -4,7 +4,9 @@ namespace App\Ui\Api\Controllers;
 
 use App\Core\Commands\Posts\CreatePostCommand;
 use App\Core\Commands\Posts\CreatePostHandler;
+use App\Core\Entities\Post\Post;
 use App\Core\Repositories\PostsRepository;
+use HTMLPurifier;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,5 +73,20 @@ class PostsController extends ApiController
             'title' => $newPost->getTitle(),
             'created_at' => $newPost->getCreatedAt(),
         ], 201);
+    }
+
+
+    /**
+     * @Route("posts/{id}", name="posts_show", methods={"GET"})
+     * @return Response
+     */
+    public function show(Post $post, HtmlPurifier $purifier): Response
+    {
+        return $this->json([
+            'id' => $post->getId(),
+            'title' => $post->getTitle(),
+            'text' => $purifier->purify($post->getText()),
+            'created_at' => $post->getCreatedAt(),
+        ], 200);
     }
 }
