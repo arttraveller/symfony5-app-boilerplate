@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Subscribers;
 
+use App\Events\Handlers\Exceptions\ApiValidationExceptionHandler;
 use App\Exceptions\ApiValidationException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -24,22 +24,15 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function processException(ExceptionEvent $event)
     {
         $exception = $event->getThrowable();
+        $excHandler = null;
         switch ($exception) {
             case $exception instanceof ApiValidationException:
-                $this->processApiValidationException($event, $exception);
+                $excHandler = new ApiValidationExceptionHandler($event, $exception);
                 break;
         }
-    }
-
-
-    private function processApiValidationException(ExceptionEvent $event, ApiValidationException $exc)
-    {
-        $message = count($exc->getValidationErrors()) > 0 ? $exc->getValidationErrors() : $exc->getMessage();
-        $event->setResponse(new JsonResponse([
-            'error' => [
-                'code' => 400,
-                'message' => $message,
-            ]
-        ], 400));
+        // If exception handler created then handle exception
+        if ($excHandler) {
+            $excHandler->handle();
+        }
     }
 }
