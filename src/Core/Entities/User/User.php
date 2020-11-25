@@ -42,6 +42,11 @@ class User extends Entity
     private string $email;
 
     /**
+     * @ORM\Embedded(class="Name", columnPrefix=false)
+     */
+    private Name $name;
+
+    /**
      * @ORM\Column(type="string", name="password_hash")
      */
     private string $passwordHash;
@@ -89,10 +94,16 @@ class User extends Entity
      * @param string $confirmToken
      * @return User
      */
-    public static function registerByEmail(string $email, string $passwordHash, string $confirmToken): self
+    public static function registerByEmail(
+        string $email,
+        string $passwordHash,
+        string $confirmToken,
+        Name $name
+    ): self
     {
         $newUser = new self();
         $newUser->email = $email;
+        $newUser->name = $name;
         $newUser->passwordHash = $passwordHash;
         $newUser->confirmToken = $confirmToken;
         $newUser->status = self::STATUS_WAIT;
@@ -109,6 +120,12 @@ class User extends Entity
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+
+    public function getName(): Name
+    {
+        return $this->name;
     }
 
 

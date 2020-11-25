@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Core\Entities\User\Name;
 use App\Core\Entities\User\User;
 use App\Core\Services\Auth\PasswordHasher;
 use App\Core\Services\Auth\Tokenizer;
@@ -12,6 +13,8 @@ class UsersFixtures extends Fixture
 {
     public const CONFIRMED_USER_EMAIL = 'user@example.com';
     public const CONFIRMED_USER_PASSWORD = 'password';
+    public const CONFIRMED_USER_FIRSTNAME = 'John';
+    public const CONFIRMED_USER_LASTNAME = 'Smith';
     public const UNCONFIRMED_USER_EMAIL = 'unconfirmed@example.com';
     public const UNCONFIRMED_USER_TOKEN = 'confirmTokenHere';
 
@@ -40,7 +43,8 @@ class UsersFixtures extends Fixture
         $user = User::registerByEmail(
             self::CONFIRMED_USER_EMAIL,
             $this->passwordHasher->hash(self::CONFIRMED_USER_PASSWORD),
-            $this->tokenizer->generateConfirmToken()
+            $this->tokenizer->generateConfirmToken(),
+            new Name(self::CONFIRMED_USER_FIRSTNAME, self::CONFIRMED_USER_LASTNAME)
         );
         $user->confirmRegistration();
 
@@ -53,7 +57,8 @@ class UsersFixtures extends Fixture
         $user = User::registerByEmail(
             self::UNCONFIRMED_USER_EMAIL,
             $this->passwordHasher->hash('password'),
-            self::UNCONFIRMED_USER_TOKEN
+            self::UNCONFIRMED_USER_TOKEN,
+            new Name('Jane', 'Smith')
         );
 
         return $user;

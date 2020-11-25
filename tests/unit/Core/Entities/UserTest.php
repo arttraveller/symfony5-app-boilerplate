@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\Core\Entities\User\Name;
 use App\Core\Entities\User\ResetToken;
 use App\Tests\Other\TestUserFactory;
 
@@ -11,14 +12,6 @@ class UserTest extends \Codeception\Test\Unit
      * @var \App\Tests\UnitTester
      */
     protected $tester;
-    
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
 
 
     public function testRegistrationByEmailOk(): void
@@ -26,15 +19,31 @@ class UserTest extends \Codeception\Test\Unit
         $user = TestUserFactory::registerByEmail(
             $email = 'abc@example.com',
             $passwordHash = 'password_hash',
-            $confirmToken = 'confirm_token'
+            $confirmToken = 'confirm_token',
+            $firstName = 'New',
+            $lastName = 'User',
         );
 
         $this->assertEquals($email, $user->getEmail());
+        $this->assertEquals('New User', $user->getName()->getFullName());
         $this->assertEquals($passwordHash, $user->getPasswordHash());
         $this->assertEquals($confirmToken, $user->getConfirmToken());
         $this->assertTrue($user->isWait());
         $this->assertFalse($user->isActive());
         $this->assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedAt());
+    }
+
+
+    public function testRegistrationByEmailWithEmptyName(): void
+    {
+        $this->expectExceptionMessage('Last name must not be empty');
+        $user = TestUserFactory::registerByEmail(
+            $email = 'abc@example.com',
+            $passwordHash = 'password_hash',
+            $confirmToken = 'confirm_token',
+            $firstName = 'New',
+            $lastName = '',
+        );
     }
 
 
