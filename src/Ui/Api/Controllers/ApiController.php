@@ -2,8 +2,8 @@
 
 namespace App\Ui\Api\Controllers;
 
+use App\Core\Fetchers\Interfaces\CurrentUserFetcherInterface;
 use App\Exceptions\ApiValidationException;
-use App\Ui\Shared\Traits\GetUserEntityFromController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
@@ -14,17 +14,19 @@ abstract class ApiController extends AbstractController
 {
     protected const PER_PAGE_DEFAULT = 20;
 
-    use GetUserEntityFromController;
+    /**
+     * @required
+     */
+    public SerializerInterface $serializer;
+    /**
+     * @required
+     */
+    public CurrentUserFetcherInterface $userFetcher;
+    /**
+     * @required
+     */
+    public ValidatorInterface $validator;
 
-    protected SerializerInterface $serializer;
-    protected ValidatorInterface $validator;
-
-
-    public function __construct(SerializerInterface $serializer, ValidatorInterface $validator)
-    {
-        $this->serializer = $serializer;
-        $this->validator = $validator;
-    }
 
 
     protected function createCommand(Request $request, $commandClass): object

@@ -3,29 +3,25 @@
 namespace App\Core\Commands\Posts;
 
 use App\Core\Entities\Post\Post;
+use App\Core\Fetchers\Interfaces\CurrentUserFetcherInterface;
 use App\Core\Repositories\PostsRepository;
-use App\Core\Repositories\UsersRepository;
-use Symfony\Component\Security\Core\Security;
 
 class CreatePostHandler
 {
     private PostsRepository $postsRepo;
-    private Security $security;
-    private UsersRepository $usersRepo;
+    private CurrentUserFetcherInterface $userFetcher;
 
 
-    public function __construct(PostsRepository $postsRepo, Security $security, UsersRepository $usersRepo)
+    public function __construct(PostsRepository $postsRepo, CurrentUserFetcherInterface $userFetcher)
     {
         $this->postsRepo = $postsRepo;
-        $this->security = $security;
-        $this->usersRepo = $usersRepo;
+        $this->userFetcher = $userFetcher;
     }
 
 
     public function handle(CreatePostCommand $command): Post
     {
-        $userId = $this->security->getUser()->getId();
-        $user = $this->usersRepo->getOneById($userId);
+        $user = $this->userFetcher->getUser();
         $post = new Post($user, $command->title, $command->text);
         $this->postsRepo->add($post);
 

@@ -14,7 +14,7 @@ class UsersController extends ApiController
      */
     public function profile(Request $request): Response
     {
-        $user = $this->getUserEntity();
+        $user = $this->userFetcher->getUser();
 
         return $this->json([
             'id' => $user->getId(),
