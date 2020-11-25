@@ -7,17 +7,16 @@ use App\DataFixtures\UsersFixtures;
 
 class SignUpControllerCest
 {
-    public function _before(FunctionalTester $I)
-    {
-    }
 
     public function testSignUpOk(FunctionalTester $I)
     {
         $I->amOnPage('/signup');
         $I->seeResponseCodeIs(200);
         $I->seeElement('form', ['name' => 'sign_up_form']);
-        $I->fillField('Email', $title = 'new-user@example.com');
-        $I->fillField('Password', $text = 'password');
+        $I->fillField('First name', $firstName = 'Kelly');
+        $I->fillField('Last name', $lastName = 'Wilson');
+        $I->fillField('Email', $email = 'new-user@example.com');
+        $I->fillField('Password', 'password');
         $I->click('Sign up', '.btn');
 
         $I->seeResponseCodeIs(200);
@@ -26,21 +25,29 @@ class SignUpControllerCest
 
         // User in DB?
         $usersRepository = $I->grabService(UsersRepository::class);
-        $newUser = $usersRepository->getOneByEmail('new-user@example.com');
+        $newUser = $usersRepository->getOneBy([
+            'email' => $email,
+            'name.firstName' => $firstName,
+            'name.lastName' => $lastName,
+        ]);
         $I->assertFalse($newUser->isActive());
     }
 
 
-    public function testSignUpWithInvalidData(FunctionalTester $I)
+    public function testSignUpWithInvalidCredentials(FunctionalTester $I)
     {
         $I->amOnPage('/signup');
         $I->submitForm('form[name=sign_up_form]', [
+            'sign_up_form[firstName]' => 'Kelly',
+            'sign_up_form[lastName]' => 'Wilson',
             'sign_up_form[email]' => 'not-valid-email',
             'sign_up_form[password]' => '123',
         ]);
 
         $I->seeCurrentUrlEquals('/signup');
         $I->seeNumberOfElements('input.is-invalid', 2);
+        $I->seeElement('input#sign_up_form_email.is-invalid');
+        $I->seeElement('input#sign_up_form_password.is-invalid');
     }
 
 
@@ -48,6 +55,8 @@ class SignUpControllerCest
     {
         $I->amOnPage('/signup');
         $I->submitForm('form[name=sign_up_form]', [
+            'sign_up_form[firstName]' => 'Kelly',
+            'sign_up_form[lastName]' => 'Wilson',
             'sign_up_form[email]' => UsersFixtures::CONFIRMED_USER_EMAIL,
             'sign_up_form[password]' => 'password',
         ]);

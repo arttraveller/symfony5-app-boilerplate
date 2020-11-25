@@ -20,4 +20,16 @@ class SignUpCommand
      * @Assert\Length(min=6, max=150)
      */
     public string $password = '';
+
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
+     */
+    public string $firstName = '';
+
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
+     */
+    public string $lastName = '';
 }

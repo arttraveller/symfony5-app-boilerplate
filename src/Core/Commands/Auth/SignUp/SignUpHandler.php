@@ -2,6 +2,7 @@
 
 namespace App\Core\Commands\Auth\SignUp;
 
+use App\Core\Entities\User\Name;
 use App\Core\Entities\User\User;
 use App\Core\Repositories\UsersRepository;
 use App\Core\Services\Auth\PasswordHasher;
@@ -32,6 +33,7 @@ class SignUpHandler
             $email,
             $this->passwordHasher->hash($password),
             $confirmToken = $this->tokenizer->generateConfirmToken(),
+            new Name($command->firstName, $command->lastName)
         );
 
         $this->usersRepo->add($newUser);
