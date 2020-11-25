@@ -37,7 +37,7 @@ class PostsController extends ApiController
     public function posts(Request $request, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
-            $this->postsRepo->findAll(),
+            $this->postsRepo->findAllWithUser(),
             $request->query->getInt('page', 1),
             self::PER_PAGE_DEFAULT
         );
@@ -45,6 +45,10 @@ class PostsController extends ApiController
         return $this->json([
             'records' => array_map(fn($post) => [
                 'id' => $post->getId(),
+                'user' => [
+                    'id' => $post->getUser()->getId(),
+                    'full_name' => $post->getUser()->getName()->getFullName(),
+                ],
                 'title' => $post->getTitle(),
                 'created_at' => $post->getCreatedAt(),
             ], (array)$pagination->getItems()),

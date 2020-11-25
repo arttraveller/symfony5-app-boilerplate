@@ -5,15 +5,13 @@ namespace App\Tests;
 use App\Core\Entities\Post\Post;
 use App\Core\Repositories\PostsRepository;
 use App\DataFixtures\PostsFixtures;
+use App\DataFixtures\UsersFixtures;
 use App\Tests\Other\LoginFunctional;
 
 class PostsControllerCest
 {
     use LoginFunctional;
 
-    public function _before(FunctionalTester $I)
-    {
-    }
 
     public function testIndexOk(FunctionalTester $I)
     {
@@ -22,6 +20,7 @@ class PostsControllerCest
         $I->seeResponseCodeIs(200);
         $I->seeElement('div.posts');
         $I->see(PostsFixtures::LAST_POST_TITLE, 'td.post-title');
+        $I->see(UsersFixtures::getConfirmedUserFullName(), 'td.post-author');
     }
 
     public function testCreateOk(FunctionalTester $I)

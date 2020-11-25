@@ -22,6 +22,12 @@ class UsersFixtures extends Fixture
     private Tokenizer $tokenizer;
 
 
+    public static function getConfirmedUserFullName()
+    {
+        return self::CONFIRMED_USER_FIRSTNAME . ' ' . self::CONFIRMED_USER_LASTNAME;
+    }
+
+
     public function __construct(PasswordHasher $hasher, Tokenizer $tokenizer)
     {
         $this->passwordHasher = $hasher;

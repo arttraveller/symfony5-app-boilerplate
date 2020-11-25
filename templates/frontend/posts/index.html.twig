@@ -15,6 +15,7 @@
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Author</th>
                     <th>Created</th>
                 </tr>
             </thead>
@@ -23,6 +24,9 @@
                     <tr>
                         <td class="post-title">
                             <a href="{{ path('posts_show', {id: post.id}) }}">{{ post.title }}</a>
+                        </td>
+                        <td class="post-author">
+                            {{ post.user.name.getFullName() }}
                         </td>
                         <td class="post-created">
                             {{ post.createdAt|date("d.m.Y") }}

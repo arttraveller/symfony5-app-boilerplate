@@ -43,7 +43,7 @@ class PostsController extends FrontendController
     public function index(Request $request, PostsRepository $postsRepo, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
-            $postsRepo->findAll(),
+            $postsRepo->findAllWithUser(),
             $request->query->getInt('page', 1),
             self::PER_PAGE_DEFAULT
         );

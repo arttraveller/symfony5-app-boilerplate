@@ -4,6 +4,7 @@ namespace App\Tests;
 
 use App\Core\Repositories\PostsRepository;
 use App\DataFixtures\PostsFixtures;
+use App\DataFixtures\UsersFixtures;
 use App\Tests\Other\LoginApi;
 
 class ApiPostsControllerCest
@@ -20,6 +21,9 @@ class ApiPostsControllerCest
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson([
             'records' => [
+                'user' => [
+                    'full_name' => UsersFixtures::getConfirmedUserFullName(),
+                ],
                 'title' => PostsFixtures::LAST_POST_TITLE,
             ],
             'pagination' => [
