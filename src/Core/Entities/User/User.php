@@ -62,6 +62,11 @@ class User extends Entity
     private ?ResetToken $resetToken;
 
     /**
+     * @ORM\Column(type="user_role", name="role")
+     */
+    private Role $role;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private int $status;
@@ -82,6 +87,7 @@ class User extends Entity
     {
         $this->createdAt = new DateTimeImmutable();
         $this->resetToken = null;
+        $this->role = Role::user();
         $this->posts = new ArrayCollection();
     }
 
@@ -150,6 +156,12 @@ class User extends Entity
     public function getResetToken(): ?ResetToken
     {
         return $this->resetToken;
+    }
+
+
+    public function getRole(): Role
+    {
+        return $this->role;
     }
 
 

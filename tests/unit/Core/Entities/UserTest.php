@@ -2,7 +2,6 @@
 
 namespace App\Tests;
 
-use App\Core\Entities\User\Name;
 use App\Core\Entities\User\ResetToken;
 use App\Tests\Other\TestUserFactory;
 
@@ -24,12 +23,18 @@ class UserTest extends \Codeception\Test\Unit
             $lastName = 'User',
         );
 
+        // Credentials, name
         $this->assertEquals($email, $user->getEmail());
         $this->assertEquals('New User', $user->getName()->getFullName());
         $this->assertEquals($passwordHash, $user->getPasswordHash());
         $this->assertEquals($confirmToken, $user->getConfirmToken());
+        // Status
         $this->assertTrue($user->isWait());
         $this->assertFalse($user->isActive());
+        // Role
+        $this->assertTrue($user->getRole()->isUser());
+        $this->assertFalse($user->getRole()->isAdmin());
+        // Created at
         $this->assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedAt());
     }
 
