@@ -1,5 +1,11 @@
-web:
+web_frontend:
     resource: ../../src/Ui/Web/Frontend/Controllers/
+    type: annotation
+
+web_admin:
+    resource: ../../src/Ui/Web/Admin/Controllers/
+    prefix: /cp
+    name_prefix: admin_
     type: annotation
 
 api:
