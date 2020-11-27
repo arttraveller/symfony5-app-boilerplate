@@ -28,9 +28,7 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('name')->formatValue(
                 fn($value, $entity) => $entity->getName()->getFullName()
             ),
-            IntegerField::new('status')->formatValue(
-                fn($value, $entity) => $entity->isActive() ? 'Active' : 'Not confirmed',
-            ),
+            IntegerField::new('status'),
             DateTimeField::new('createdAt')->formatValue(
                 fn($value, $entity) => $entity->getCreatedAt()->format('d.m.Y')
             ),

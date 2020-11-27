@@ -68,6 +68,6 @@ class UserIdentity implements UserInterface
 
     public function isActive(): string
     {
-        return $this->user->isActive();
+        return $this->user->getStatus()->isActive();
     }
 }

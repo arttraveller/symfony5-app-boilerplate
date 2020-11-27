@@ -30,8 +30,8 @@ class UserTest extends \Codeception\Test\Unit
         $this->assertEquals($passwordHash, $user->getPasswordHash());
         $this->assertEquals($confirmToken, $user->getConfirmToken());
         // Status
-        $this->assertTrue($user->isWait());
-        $this->assertFalse($user->isActive());
+        $this->assertTrue($user->getStatus()->isWait());
+        $this->assertFalse($user->getStatus()->isActive());
         // Role
         $this->assertTrue($user->getRole()->isUser());
         $this->assertFalse($user->getRole()->isAdmin());
@@ -58,8 +58,8 @@ class UserTest extends \Codeception\Test\Unit
         $user = TestUserFactory::registerByEmail();
         $user->confirmRegistration();
 
-        $this->assertFalse($user->isWait());
-        $this->assertTrue($user->isActive());
+        $this->assertFalse($user->getStatus()->isWait());
+        $this->assertTrue($user->getStatus()->isActive());
         $this->assertNull($user->getConfirmToken());
     }
 

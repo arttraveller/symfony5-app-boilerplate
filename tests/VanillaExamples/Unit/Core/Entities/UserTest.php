@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Core\Entities;
+namespace App\Tests\VanillaExamples\Unit\Core\Entities;
 
 use App\Core\Entities\User\ResetToken;
 use App\Tests\Other\TestUserFactory;
@@ -19,8 +19,8 @@ class UserTest extends TestCase
         self::assertEquals($passwordHash, $user->getPasswordHash());
         self::assertEquals($confirmToken, $user->getConfirmToken());
 
-        self::assertTrue($user->isWait());
-        self::assertFalse($user->isActive());
+        self::assertTrue($user->getStatus()->isWait()());
+        self::assertFalse($user->getStatus()->isActive());
     }
 
 
@@ -29,8 +29,8 @@ class UserTest extends TestCase
         $user = TestUserFactory::registerByEmail();
         $user->confirmRegistration();
 
-        self::assertFalse($user->isWait());
-        self::assertTrue($user->isActive());
+        self::assertFalse($user->getStatus()->isWait()());
+        self::assertTrue($user->getStatus()->isActive());
         self::assertNull($user->getConfirmToken());
     }
 

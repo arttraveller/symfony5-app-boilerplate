@@ -30,7 +30,7 @@ class SignUpControllerCest
             'name.firstName' => $firstName,
             'name.lastName' => $lastName,
         ]);
-        $I->assertFalse($newUser->isActive());
+        $I->assertFalse($newUser->getStatus()->isActive());
     }
 
 
@@ -75,6 +75,6 @@ class SignUpControllerCest
 
         $usersRepository = $I->grabService(UsersRepository::class);
         $user = $usersRepository->getOneByEmail(UsersFixtures::UNCONFIRMED_USER_EMAIL);
-        $I->assertTrue($user->isActive());
+        $I->assertTrue($user->getStatus()->isActive());
     }
 }

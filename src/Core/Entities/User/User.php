@@ -25,9 +25,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends Entity
 {
-    private const STATUS_WAIT = 1;
-    private const STATUS_ACTIVE = 2;
-
 
     /**
      * @ORM\Id
@@ -67,9 +64,9 @@ class User extends Entity
     private Role $role;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="user_status", name="status")
      */
-    private int $status;
+    private Status $status;
 
     /**
      * @ORM\Column(type="datetime_immutable", options={"default"="CURRENT_TIMESTAMP"}, nullable=false)
@@ -112,7 +109,7 @@ class User extends Entity
         $newUser->name = $name;
         $newUser->passwordHash = $passwordHash;
         $newUser->confirmToken = $confirmToken;
-        $newUser->status = self::STATUS_WAIT;
+        $newUser->status = Status::wait();
 
         return $newUser;
     }
@@ -174,30 +171,9 @@ class User extends Entity
     }
 
 
-    public function getStatus(): int
+    public function getStatus(): Status
     {
         return $this->status;
-    }
-
-
-    /**
-     * Returns whether the user has STATUS_WAIT.
-     *
-     * @return bool
-     */
-    public function isWait(): bool
-    {
-        return $this->status === self::STATUS_WAIT;
-    }
-
-    /**
-     * Returns whether the user has STATUS_ACTIVE.
-     *
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->status === self::STATUS_ACTIVE;
     }
 
 
@@ -206,10 +182,10 @@ class User extends Entity
      */
     public function confirmRegistration(): void
     {
-        if (!$this->isWait()) {
+        if (!$this->status->isWait()) {
             throw new DomainException('User already confirmed');
         }
-        $this->status = self::STATUS_ACTIVE;
+        $this->status = Status::active();
         $this->confirmToken = null;
     }
 
@@ -223,7 +199,7 @@ class User extends Entity
      */
     public function requestPasswordReset(ResetToken $newToken): void
     {
-        if (!$this->isActive()) {
+        if (!$this->status->isActive()) {
             throw new UserNotActiveException('User is not active');
         }
         if ($this->resetToken && !$this->resetToken->isExpired()) {
