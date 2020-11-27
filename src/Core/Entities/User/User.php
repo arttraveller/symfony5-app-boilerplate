@@ -165,6 +165,15 @@ class User extends Entity
     }
 
 
+    public function changeRole(Role $newRole): void
+    {
+        if ($this->role->getName() === $newRole->getName()) {
+            throw new DomainException('Same role already used');
+        }
+        $this->role = $newRole;
+    }
+
+
     /**
      * Returns whether the user has STATUS_WAIT.
      *

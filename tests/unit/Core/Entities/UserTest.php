@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Core\Entities\User\ResetToken;
+use App\Core\Entities\User\Role;
 use App\Tests\Other\TestUserFactory;
 
 class UserTest extends \Codeception\Test\Unit
@@ -93,4 +94,22 @@ class UserTest extends \Codeception\Test\Unit
         $this->expectExceptionMessage('Reset token was already requested');
         $user->requestPasswordReset(new ResetToken('test_reset_token'));
     }
+
+
+    public function testThrowsExceptionWhenChangeRoleToSame(): void
+    {
+        $user = TestUserFactory::registerByEmail();
+        $this->expectExceptionMessage('Same role already used');
+        $user->changeRole(Role::user());
+    }
+
+
+    public function testChangeRoleOk(): void
+    {
+        $user = TestUserFactory::registerByEmail();
+        $user->changeRole(Role::admin());
+        $this->assertFalse($user->getRole()->isUser());
+        $this->assertTrue($user->getRole()->isAdmin());
+    }
+
 }
