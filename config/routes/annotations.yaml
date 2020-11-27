@@ -4,7 +4,7 @@ web_frontend:
 
 web_admin:
     resource: ../../src/Ui/Web/Admin/Controllers/
-    prefix: /cp
+    prefix: /admin
     name_prefix: admin_
     type: annotation
 

@@ -45,7 +45,7 @@ class UserIdentity implements UserInterface
      */
     public function getRoles(): array
     {
-        return [];
+        return [$this->user->getRole()->getName()];
     }
 
     
