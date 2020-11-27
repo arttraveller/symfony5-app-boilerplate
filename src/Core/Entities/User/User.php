@@ -174,6 +174,12 @@ class User extends Entity
     }
 
 
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+
     /**
      * Returns whether the user has STATUS_WAIT.
      *

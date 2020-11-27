@@ -36,6 +36,12 @@ class Name
     }
 
 
+    public function __toString(): string
+    {
+         return $this->getFullName();
+    }
+
+
     public function getFullName(): string
     {
         return $this->firstName . ' ' . $this->lastName;
