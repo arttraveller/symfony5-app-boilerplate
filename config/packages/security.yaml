@@ -29,6 +29,7 @@ security:
             pattern:   ^/api
             user_checker: App\Security\UserChecker
             stateless: true
+            entry_point: lexik_jwt_authentication.jwt_token_authenticator
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
@@ -37,6 +38,7 @@ security:
             pattern: ^/
             user_checker: App\Security\UserChecker
             lazy: true
+            entry_point: App\Security\LoginFormAuthenticator
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
