@@ -2,10 +2,9 @@
 
 namespace App\Exceptions;
 
-use App\Exceptions\Interfaces\ExceptionInterface;
 use Throwable;
 
-class ApiValidationException extends \DomainException implements ExceptionInterface
+class ApiValidationException extends DomainException
 {
     private array $validationErrors = [];
 
