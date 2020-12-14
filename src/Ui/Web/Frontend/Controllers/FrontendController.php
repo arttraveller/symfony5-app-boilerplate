@@ -2,7 +2,7 @@
 
 namespace App\Ui\Web\Frontend\Controllers;
 
-use App\Core\Fetchers\Interfaces\CurrentUserFetcherInterface;
+use App\Domain\Fetchers\Interfaces\CurrentUserFetcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class FrontendController extends AbstractController

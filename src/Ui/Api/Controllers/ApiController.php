@@ -2,7 +2,7 @@
 
 namespace App\Ui\Api\Controllers;
 
-use App\Core\Fetchers\Interfaces\CurrentUserFetcherInterface;
+use App\Domain\Fetchers\Interfaces\CurrentUserFetcherInterface;
 use App\Exceptions\ApiValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

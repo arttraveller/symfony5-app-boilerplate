@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Core\Entities\Post\Post;
-use App\Core\Repositories\UsersRepository;
+use App\Domain\Entities\Post\Post;
+use App\Domain\Repositories\UsersRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;

@@ -2,8 +2,8 @@
 
 namespace App\Tests;
 
-use App\Core\Entities\Post\Post;
-use App\Core\Repositories\PostsRepository;
+use App\Domain\Entities\Post\Post;
+use App\Domain\Repositories\PostsRepository;
 use App\DataFixtures\PostsFixtures;
 use App\DataFixtures\UsersFixtures;
 use App\Tests\Other\LoginFunctional;

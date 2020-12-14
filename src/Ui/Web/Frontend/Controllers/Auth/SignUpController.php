@@ -2,10 +2,10 @@
 
 namespace App\Ui\Web\Frontend\Controllers\Auth;
 
-use App\Core\Commands\Auth\SignUp\ConfirmEmailCommand;
-use App\Core\Commands\Auth\SignUp\ConfirmEmailHandler;
-use App\Core\Commands\Auth\SignUp\SignUpCommand;
-use App\Core\Commands\Auth\SignUp\SignUpHandler;
+use App\Domain\Commands\Auth\SignUp\ConfirmEmailCommand;
+use App\Domain\Commands\Auth\SignUp\ConfirmEmailHandler;
+use App\Domain\Commands\Auth\SignUp\SignUpCommand;
+use App\Domain\Commands\Auth\SignUp\SignUpHandler;
 use App\Exceptions\EntityNotFoundException;
 use App\Ui\Web\Frontend\Forms\Auth\SignUpForm;
 use App\Ui\Web\Frontend\Controllers\FrontendController;

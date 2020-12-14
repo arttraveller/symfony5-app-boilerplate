@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-use App\Core\Entities\Post\Post;
+use App\Domain\Entities\Post\Post;
 use App\Tests\Other\TestUserFactory;
 
 class PostTest extends \Codeception\Test\Unit

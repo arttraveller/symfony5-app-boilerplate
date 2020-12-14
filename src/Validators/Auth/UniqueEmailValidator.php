@@ -2,7 +2,7 @@
 
 namespace App\Validators\Auth;
 
-use App\Core\Repositories\UsersRepository;
+use App\Domain\Repositories\UsersRepository;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

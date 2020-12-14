@@ -2,10 +2,10 @@
 
 namespace App\Ui\Web\Frontend\Controllers\Auth;
 
-use App\Core\Commands\Auth\PasswordReset\PasswordResetCommand;
-use App\Core\Commands\Auth\PasswordReset\PasswordResetHandler;
-use App\Core\Commands\Auth\PasswordReset\RequestPasswordResetCommand;
-use App\Core\Commands\Auth\PasswordReset\RequestPasswordResetHandler;
+use App\Domain\Commands\Auth\PasswordReset\PasswordResetCommand;
+use App\Domain\Commands\Auth\PasswordReset\PasswordResetHandler;
+use App\Domain\Commands\Auth\PasswordReset\RequestPasswordResetCommand;
+use App\Domain\Commands\Auth\PasswordReset\RequestPasswordResetHandler;
 use App\Exceptions\EntityNotFoundException;
 use App\Exceptions\ResetTokenAlreadyRequestedException;
 use App\Exceptions\UserNotActiveException;

@@ -2,7 +2,7 @@
 
 namespace App\Ui\Web\Frontend\Forms\Auth;
 
-use App\Core\Commands\Auth\SignUp\SignUpCommand;
+use App\Domain\Commands\Auth\SignUp\SignUpCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

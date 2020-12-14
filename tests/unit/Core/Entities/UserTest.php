@@ -2,8 +2,8 @@
 
 namespace App\Tests;
 
-use App\Core\Entities\User\ResetToken;
-use App\Core\Entities\User\Role;
+use App\Domain\Entities\User\ResetToken;
+use App\Domain\Entities\User\Role;
 use App\Tests\Other\TestUserFactory;
 
 class UserTest extends \Codeception\Test\Unit

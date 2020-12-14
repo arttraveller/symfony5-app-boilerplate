@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures;
 
-use App\Core\Entities\User\Name;
-use App\Core\Entities\User\Role;
-use App\Core\Entities\User\User;
-use App\Core\Services\Auth\PasswordHasher;
-use App\Core\Services\Auth\Tokenizer;
+use App\Domain\Entities\User\Name;
+use App\Domain\Entities\User\Role;
+use App\Domain\Entities\User\User;
+use App\Domain\Services\Auth\PasswordHasher;
+use App\Domain\Services\Auth\Tokenizer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

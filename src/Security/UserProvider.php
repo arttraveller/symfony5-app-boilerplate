@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Core\Repositories\UsersRepository;
+use App\Domain\Repositories\UsersRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;

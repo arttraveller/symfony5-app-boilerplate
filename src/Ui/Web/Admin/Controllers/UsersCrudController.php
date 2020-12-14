@@ -2,7 +2,7 @@
 
 namespace App\Ui\Web\Admin\Controllers;
 
-use App\Core\Entities\User\User;
+use App\Domain\Entities\User\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;

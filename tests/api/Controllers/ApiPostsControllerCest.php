@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-use App\Core\Repositories\PostsRepository;
+use App\Domain\Repositories\PostsRepository;
 use App\DataFixtures\PostsFixtures;
 use App\DataFixtures\UsersFixtures;
 use App\Tests\Other\LoginApi;

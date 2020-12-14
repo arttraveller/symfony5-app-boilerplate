@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Core\Entities\User\User;
+use App\Domain\Entities\User\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserIdentity implements UserInterface

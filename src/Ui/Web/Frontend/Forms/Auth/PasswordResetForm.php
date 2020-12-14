@@ -2,7 +2,7 @@
 
 namespace App\Ui\Web\Frontend\Forms\Auth;
 
-use App\Core\Commands\Auth\PasswordReset\PasswordResetCommand;
+use App\Domain\Commands\Auth\PasswordReset\PasswordResetCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;

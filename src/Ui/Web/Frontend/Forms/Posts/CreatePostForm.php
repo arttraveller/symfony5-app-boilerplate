@@ -2,7 +2,7 @@
 
 namespace App\Ui\Web\Frontend\Forms\Posts;
 
-use App\Core\Commands\Posts\CreatePostCommand;
+use App\Domain\Commands\Posts\CreatePostCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

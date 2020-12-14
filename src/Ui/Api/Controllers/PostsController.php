@@ -2,10 +2,10 @@
 
 namespace App\Ui\Api\Controllers;
 
-use App\Core\Commands\Posts\CreatePostCommand;
-use App\Core\Commands\Posts\CreatePostHandler;
-use App\Core\Entities\Post\Post;
-use App\Core\Repositories\PostsRepository;
+use App\Domain\Commands\Posts\CreatePostCommand;
+use App\Domain\Commands\Posts\CreatePostHandler;
+use App\Domain\Entities\Post\Post;
+use App\Domain\Repositories\PostsRepository;
 use HTMLPurifier;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;

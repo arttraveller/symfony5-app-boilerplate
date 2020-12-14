@@ -2,8 +2,8 @@
 
 namespace App\Tests;
 
-use App\Core\Entities\User\User;
-use App\Core\Repositories\UsersRepository;
+use App\Domain\Entities\User\User;
+use App\Domain\Repositories\UsersRepository;
 use App\DataFixtures\UsersFixtures;
 
 class UsersRepositoryCest

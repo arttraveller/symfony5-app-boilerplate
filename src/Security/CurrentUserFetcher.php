@@ -2,9 +2,9 @@
 
 namespace App\Security;
 
-use App\Core\Entities\User\User;
-use App\Core\Fetchers\Interfaces\CurrentUserFetcherInterface;
-use App\Core\Repositories\UsersRepository;
+use App\Domain\Entities\User\User;
+use App\Domain\Fetchers\Interfaces\CurrentUserFetcherInterface;
+use App\Domain\Repositories\UsersRepository;
 use App\Exceptions\DomainException;
 use Symfony\Component\Security\Core\Security;
 
