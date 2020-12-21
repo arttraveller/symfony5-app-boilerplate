@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Domain\Repositories\UsersRepository;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -10,10 +10,10 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
-    private UsersRepository $repo;
+    private UsersRepositoryInterface $repo;
 
 
-    public function __construct(UsersRepository $repo)
+    public function __construct(UsersRepositoryInterface $repo)
     {
         $this->repo = $repo;
     }

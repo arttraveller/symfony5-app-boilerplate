@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Domain\Repositories;
+namespace App\Repositories;
 
 use App\Domain\Entities\Post\Post;
+use App\Domain\Repositories\Interfaces\PostsRepositoryInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
-class PostsRepository extends Repository
+class PostsRepository extends Repository implements PostsRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -4,15 +4,15 @@ namespace App\Domain\Commands\Posts;
 
 use App\Domain\Entities\Post\Post;
 use App\Domain\Fetchers\Interfaces\CurrentUserFetcherInterface;
-use App\Domain\Repositories\PostsRepository;
+use App\Domain\Repositories\Interfaces\PostsRepositoryInterface;
 
 class CreatePostHandler
 {
-    private PostsRepository $postsRepo;
+    private PostsRepositoryInterface $postsRepo;
     private CurrentUserFetcherInterface $userFetcher;
 
 
-    public function __construct(PostsRepository $postsRepo, CurrentUserFetcherInterface $userFetcher)
+    public function __construct(PostsRepositoryInterface $postsRepo, CurrentUserFetcherInterface $userFetcher)
     {
         $this->postsRepo = $postsRepo;
         $this->userFetcher = $userFetcher;

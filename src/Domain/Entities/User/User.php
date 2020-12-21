@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Domain\Repositories\UsersRepository")
+ * @ORM\Entity
  * @ORM\Table(
  *     name="users",
  *     uniqueConstraints={

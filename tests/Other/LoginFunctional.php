@@ -3,7 +3,7 @@
 namespace App\Tests\Other;
 
 use App\Domain\Entities\User\User;
-use App\Domain\Repositories\UsersRepository;
+use App\Repositories\UsersRepository;
 use App\DataFixtures\UsersFixtures;
 use App\Tests\FunctionalTester;
 use Symfony\Component\Security\Core\Security;

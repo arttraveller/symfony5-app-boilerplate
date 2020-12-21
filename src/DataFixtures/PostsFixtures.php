@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Domain\Entities\Post\Post;
-use App\Domain\Repositories\UsersRepository;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -13,10 +13,10 @@ class PostsFixtures extends Fixture implements DependentFixtureInterface
     public const LAST_POST_TITLE = 'Last post';
     public const LAST_POST_TEXT = 'Last post content here...';
 
-    private UsersRepository $usersRepo;
+    private UsersRepositoryInterface $usersRepo;
 
 
-    public function __construct(UsersRepository $usersRepo)
+    public function __construct(UsersRepositoryInterface $usersRepo)
     {
         $this->usersRepo = $usersRepo;
     }

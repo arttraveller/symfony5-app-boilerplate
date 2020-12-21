@@ -4,16 +4,16 @@ namespace App\Domain\Commands\Auth\PasswordReset;
 
 use App\Domain\Entities\User\ResetToken;
 use App\Domain\Entities\User\User;
-use App\Domain\Repositories\UsersRepository;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 use App\Domain\Services\Auth\Tokenizer;
 use App\Domain\Services\Auth\TokenSender;
 
 class RequestPasswordResetHandler
 {
-    private UsersRepository $usersRepo;
+    private UsersRepositoryInterface $usersRepo;
 
 
-    public function __construct(UsersRepository $repo, Tokenizer $tokenizer, TokenSender $tokenSender)
+    public function __construct(UsersRepositoryInterface $repo, Tokenizer $tokenizer, TokenSender $tokenSender)
     {
         $this->usersRepo = $repo;
         $this->tokenizer = $tokenizer;

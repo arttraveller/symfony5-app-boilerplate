@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Repositories;
+namespace App\Repositories;
 
 use App\Domain\Entities\Entity;
 use App\Domain\Repositories\Interfaces\RepositoryInterface;

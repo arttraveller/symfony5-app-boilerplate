@@ -5,7 +5,7 @@ namespace App\Ui\Api\Controllers;
 use App\Domain\Commands\Posts\CreatePostCommand;
 use App\Domain\Commands\Posts\CreatePostHandler;
 use App\Domain\Entities\Post\Post;
-use App\Domain\Repositories\PostsRepository;
+use App\Domain\Repositories\Interfaces\PostsRepositoryInterface;
 use HTMLPurifier;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostsController extends ApiController
 {
-    private PostsRepository $postsRepo;
+    private PostsRepositoryInterface $postsRepo;
 
 
-    public function __construct(PostsRepository $postsRepo)
+    public function __construct(PostsRepositoryInterface $postsRepo)
     {
         $this->postsRepo = $postsRepo;
     }

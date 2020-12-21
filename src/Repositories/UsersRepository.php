@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Domain\Repositories;
+namespace App\Repositories;
 
 use App\Domain\Entities\User\User;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
-class UsersRepository extends Repository
+class UsersRepository extends Repository implements UsersRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -8,7 +8,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Domain\Repositories\PostsRepository")
+ * @ORM\Entity
  * @ORM\Table(
  *     name="posts",
  * )

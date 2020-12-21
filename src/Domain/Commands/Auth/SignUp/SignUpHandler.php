@@ -4,7 +4,7 @@ namespace App\Domain\Commands\Auth\SignUp;
 
 use App\Domain\Entities\User\Name;
 use App\Domain\Entities\User\User;
-use App\Domain\Repositories\UsersRepository;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 use App\Domain\Services\Auth\PasswordHasher;
 use App\Domain\Services\Auth\Tokenizer;
 use App\Domain\Services\Auth\TokenSender;
@@ -12,11 +12,11 @@ use App\Domain\Services\Auth\TokenSender;
 class SignUpHandler
 {
     private PasswordHasher $passwordHasher;
-    private UsersRepository $usersRepo;
+    private UsersRepositoryInterface $usersRepo;
     private Tokenizer $tokenizer;
 
 
-    public function __construct(UsersRepository $repo, PasswordHasher $hasher, Tokenizer $tokenizer, TokenSender $tokenSender)
+    public function __construct(UsersRepositoryInterface $repo, PasswordHasher $hasher, Tokenizer $tokenizer, TokenSender $tokenSender)
     {
         $this->usersRepo = $repo;
         $this->passwordHasher = $hasher;

@@ -3,7 +3,7 @@
 namespace App\Tests;
 
 use App\Domain\Entities\Post\Post;
-use App\Domain\Repositories\PostsRepository;
+use App\Repositories\PostsRepository;
 use App\DataFixtures\PostsFixtures;
 
 class PostsRepositoryCest

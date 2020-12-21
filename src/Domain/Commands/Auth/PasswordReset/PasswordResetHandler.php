@@ -3,15 +3,15 @@
 namespace App\Domain\Commands\Auth\PasswordReset;
 
 use App\Domain\Entities\User\User;
-use App\Domain\Repositories\UsersRepository;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 use App\Domain\Services\Auth\PasswordHasher;
 
 class PasswordResetHandler
 {
-    private UsersRepository $usersRepo;
+    private UsersRepositoryInterface $usersRepo;
 
 
-    public function __construct(UsersRepository $repo, PasswordHasher $hasher)
+    public function __construct(UsersRepositoryInterface $repo, PasswordHasher $hasher)
     {
         $this->usersRepo = $repo;
         $this->passwordHasher = $hasher;

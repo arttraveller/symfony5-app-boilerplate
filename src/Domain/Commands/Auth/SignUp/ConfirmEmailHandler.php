@@ -2,14 +2,14 @@
 
 namespace App\Domain\Commands\Auth\SignUp;
 
-use App\Domain\Repositories\UsersRepository;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 
 class ConfirmEmailHandler
 {
-    private UsersRepository $usersRepo;
+    private UsersRepositoryInterface $usersRepo;
 
 
-    public function __construct(UsersRepository $repo)
+    public function __construct(UsersRepositoryInterface $repo)
     {
         $this->usersRepo = $repo;
     }

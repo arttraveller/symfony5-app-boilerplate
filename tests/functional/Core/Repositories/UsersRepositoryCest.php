@@ -3,7 +3,7 @@
 namespace App\Tests;
 
 use App\Domain\Entities\User\User;
-use App\Domain\Repositories\UsersRepository;
+use App\Repositories\UsersRepository;
 use App\DataFixtures\UsersFixtures;
 
 class UsersRepositoryCest

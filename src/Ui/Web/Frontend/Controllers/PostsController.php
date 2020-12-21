@@ -5,7 +5,7 @@ namespace App\Ui\Web\Frontend\Controllers;
 use App\Domain\Commands\Posts\CreatePostCommand;
 use App\Domain\Commands\Posts\CreatePostHandler;
 use App\Domain\Entities\Post\Post;
-use App\Domain\Repositories\PostsRepository;
+use App\Domain\Repositories\Interfaces\PostsRepositoryInterface;
 use App\Ui\Web\Frontend\Forms\Posts\CreatePostForm;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +40,7 @@ class PostsController extends FrontendController
      * @Route("/posts", name="posts_index")
      * @return Response
      */
-    public function index(Request $request, PostsRepository $postsRepo, PaginatorInterface $paginator): Response
+    public function index(Request $request, PostsRepositoryInterface $postsRepo, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
             $postsRepo->findAllWithUser(),

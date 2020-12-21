@@ -2,16 +2,16 @@
 
 namespace App\Validators\Auth;
 
-use App\Domain\Repositories\UsersRepository;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueEmailValidator extends ConstraintValidator
 {
-    private UsersRepository $usersRepo;
+    private UsersRepositoryInterface $usersRepo;
 
 
-    public function __construct(UsersRepository $userRepository)
+    public function __construct(UsersRepositoryInterface $userRepository)
     {
         $this->usersRepo = $userRepository;
     }

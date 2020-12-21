@@ -4,7 +4,7 @@ namespace App\Security;
 
 use App\Domain\Entities\User\User;
 use App\Domain\Fetchers\Interfaces\CurrentUserFetcherInterface;
-use App\Domain\Repositories\UsersRepository;
+use App\Domain\Repositories\Interfaces\UsersRepositoryInterface;
 use App\Exceptions\DomainException;
 use Symfony\Component\Security\Core\Security;
 
@@ -12,10 +12,10 @@ use Symfony\Component\Security\Core\Security;
 class CurrentUserFetcher implements CurrentUserFetcherInterface
 {
     private Security $security;
-    private UsersRepository $usersRepo;
+    private UsersRepositoryInterface $usersRepo;
 
 
-    public function __construct(Security $security, UsersRepository $usersRepo)
+    public function __construct(Security $security, UsersRepositoryInterface $usersRepo)
     {
         $this->security = $security;
         $this->usersRepo = $usersRepo;
