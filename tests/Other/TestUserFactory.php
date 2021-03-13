@@ -2,8 +2,8 @@
 
 namespace App\Tests\Other;
 
-use App\Domain\Entities\User\Name;
-use App\Domain\Entities\User\User;
+use App\User\Domain\User;
+use App\User\Domain\ValueObjects\Name;
 
 class TestUserFactory
 {

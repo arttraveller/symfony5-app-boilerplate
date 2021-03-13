@@ -5,10 +5,10 @@ security:
     providers:
         # the name of your user provider can be anything
         custom_user_provider:
-            id: App\Security\UserProvider
+            id: App\Auth\Infrastructure\Symfony\UserProvider
 
     encoders:
-        App\Security\UserIdentity:
+        App\Auth\Infrastructure\Symfony\UserIdentity:
             algorithm: auto
 
     firewalls:
@@ -18,7 +18,7 @@ security:
 
         api_signin:
             pattern:  ^/api/v1/signin
-            user_checker: App\Security\UserChecker
+            user_checker: App\Auth\Infrastructure\Symfony\UserChecker
             stateless: true
             json_login:
                 check_path:               /api/v1/signin
@@ -27,7 +27,7 @@ security:
 
         api:
             pattern:   ^/api
-            user_checker: App\Security\UserChecker
+            user_checker: App\Auth\Infrastructure\Symfony\UserChecker
             stateless: true
             entry_point: lexik_jwt_authentication.jwt_token_authenticator
             guard:
@@ -36,12 +36,12 @@ security:
 
         main:
             pattern: ^/
-            user_checker: App\Security\UserChecker
+            user_checker: App\Auth\Infrastructure\Symfony\UserChecker
             lazy: true
-            entry_point: App\Security\LoginFormAuthenticator
+            entry_point: App\Auth\Infrastructure\Symfony\LoginFormAuthenticator
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthenticator
+                    - App\Auth\Infrastructure\Symfony\LoginFormAuthenticator
             logout:
                 path: auth_logout
                 # where to redirect after logout
@@ -50,7 +50,7 @@ security:
                 secret: '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path: /
-            access_denied_handler: App\Security\AccessDeniedHandler
+            access_denied_handler: App\Auth\Infrastructure\Symfony\AccessDeniedHandler
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

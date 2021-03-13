@@ -2,7 +2,7 @@
 
 namespace App\Tests\Other;
 
-use App\DataFixtures\UsersFixtures;
+use App\Shared\DataFixtures\UsersFixtures;
 use App\Tests\ApiTester;
 
 trait LoginApi

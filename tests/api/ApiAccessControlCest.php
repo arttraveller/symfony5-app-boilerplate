@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-use App\DataFixtures\UsersFixtures;
+use App\Shared\DataFixtures\UsersFixtures;
 use App\Tests\Other\LoginApi;
 
 class ApiAccessControlCest

@@ -1,15 +1,37 @@
-web_frontend:
-    resource: ../../src/Ui/Web/Frontend/Controllers/
+web_auth:
+    resource: ../../src/Auth/Presentation/Web
     type: annotation
 
 web_admin:
-    resource: ../../src/Ui/Web/Admin/Controllers/
+    resource: ../../src/Admin/Presentation
     prefix: /admin
     name_prefix: admin_
     type: annotation
 
-api:
-    resource: ../../src/Ui/Api/Controllers/
+web_site:
+    resource: ../../src/Site/Presentation/Web
+    type: annotation
+
+
+
+web_users:
+    resource: ../../src/User/Presentation/Web
+    type: annotation
+
+api_users:
+    resource: ../../src/User/Presentation/Api
+    prefix: /api/v1
+    name_prefix: api_
+    type: annotation
+    defaults:
+        _format: json
+
+web_posts:
+    resource: ../../src/Post/Presentation/Web
+    type: annotation
+
+api_posts:
+    resource: ../../src/Post/Presentation/Api
     prefix: /api/v1
     name_prefix: api_
     type: annotation

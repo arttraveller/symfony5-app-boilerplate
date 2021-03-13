@@ -2,14 +2,15 @@
 
 namespace App\Tests\Other;
 
-use App\Domain\Entities\User\User;
-use App\Repositories\UsersRepository;
-use App\DataFixtures\UsersFixtures;
+use App\Shared\DataFixtures\UsersFixtures;
 use App\Tests\FunctionalTester;
+use App\User\Domain\User;
 use Symfony\Component\Security\Core\Security;
 
 trait LoginFunctional
 {
+    use UsersServices;
+
     protected function login(FunctionalTester $I, $email = UsersFixtures::CONFIRMED_USER_EMAIL, $password = UsersFixtures::CONFIRMED_USER_PASSWORD): void
     {
         $I->amOnPage('/signin');
@@ -18,12 +19,11 @@ trait LoginFunctional
         $I->click('Sign in', '.btn');
     }
 
-
     protected function getCurrentUser(FunctionalTester $I): User
     {
         $security = $I->grabService(Security::class);
-        $usersRepository = $I->grabService(UsersRepository::class);
+        $usersQs = $this->getUsersQueryService($I);
 
-        return $usersRepository->getOneById($security->getUser()->getId());
+        return $usersQs->getOneById($security->getUser()->getId());
     }
 }
